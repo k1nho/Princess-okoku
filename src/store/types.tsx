@@ -7,7 +7,6 @@ export interface Card {
     special: string
 }
 
-
 export interface PlayerInfo {
     id: string,
     wins: number,
@@ -15,4 +14,10 @@ export interface PlayerInfo {
     name: string
 }
 
-
+export interface BattleInfo {
+    deck: Card[],
+    handCards: Card[],
+    playedCards: Card[],
+    lp: number,
+    energy: number
+}
