@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { BattleInfo, Card, PlayerInfo } from "./types";
 import { v4 as uuidv4 } from "uuid"
-import { CardPool } from "./cardpool"
+import { cardpool } from "./cardpool"
 
 const playerid = uuidv4()
 
 
 interface PlayerStore {
+    tutorial: boolean
     owned: Card[]
     deck: Card[]
     info: PlayerInfo
@@ -15,6 +16,7 @@ interface PlayerStore {
     gameMode: string
     battleInfo: BattleInfo
     enemyBattleInfo: BattleInfo
+    setTutorial: () => void
     setGameMode: (mode: string) => void
     setName: (name: string) => void
     setWins: () => void
@@ -43,6 +45,7 @@ const initialBattleInfo: BattleInfo = {
 
 
 const startGame = {
+    tutorial: localStorage.getItem("isTutorial") ? false : true,
     owned: [],
     deck: [],
     info: initialInfo,
@@ -53,14 +56,7 @@ const startGame = {
     cardsCollected: 0
 }
 
-const cardPlaceholder: Card = {
-    id: "none",
-    name: "",
-    atk: 1,
-    def: 1,
-    cost: 1,
-    special: ""
-}
+const cardPlaceholder = cardpool[0]
 
 const isnewCard = (id: string, owned: Card[]) => {
     owned.forEach((card) => {
@@ -71,13 +67,16 @@ const isnewCard = (id: string, owned: Card[]) => {
     return 1
 }
 
-const getCard = (id: string): Card => {
-    CardPool.forEach((card) => {
-        if (card.id === id) {
-            return card
+export const getCard = (id: string): Card => {
+    let res = cardPlaceholder
+    for (let i = 0; i < cardpool.length; i++) {
+        if (cardpool[i].id === id) {
+            res = cardpool[i];
+            break;
         }
-    });
-    return cardPlaceholder
+    }
+
+    return res
 
 }
 
@@ -98,6 +97,7 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
     addCardToOwned: (id: string) => set((state) => ({ owned: [...state.owned, getCard(id)] })),
     addCardToDeck: (id: string) => set((state) => ({ deck: [...state.deck, getCard(id)] })),
     removeCardfromDeck: (id: string) => set((state) => ({ deck: removeCard(id, state.deck) })),
+    setTutorial: () => set(() => ({ tutorial: false }))
 }));
 
 export default usePlayerStore;

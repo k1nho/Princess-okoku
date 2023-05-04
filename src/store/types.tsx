@@ -1,6 +1,7 @@
 export interface Card {
     id: string,
     name: string,
+    iml: string,
     cost: number,
     atk: number,
     def: number,
