@@ -1,16 +1,12 @@
-export interface MonsterCard {
+export interface Card {
     id: string,
+    name: string,
     cost: number,
     atk: number,
     def: number,
     special: string
 }
 
-export interface SpellCard {
-    id: string
-    cost: number,
-    special: string
-}
 
 export interface PlayerInfo {
     id: string,
@@ -19,5 +15,4 @@ export interface PlayerInfo {
     name: string
 }
 
-export type Card = MonsterCard | SpellCard
 

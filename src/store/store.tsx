@@ -4,15 +4,6 @@ import { v4 as uuidv4 } from "uuid"
 
 const playerid = uuidv4()
 
-const CardPool = [
-    {
-        id: "123",
-        atk: 2,
-        def: 2,
-        cost: 1,
-        special: 'search'
-    },
-]
 
 interface PlayerStore {
     owned: Card[]
@@ -47,6 +38,7 @@ const startGame = {
 
 const CardPlaceholder: Card = {
     id: "123",
+    name: "",
     atk: 1,
     def: 1,
     cost: 1,
