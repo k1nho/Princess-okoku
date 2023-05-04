@@ -1,10 +1,32 @@
+import { useState } from "react";
 import aiprincess from "../assets/decks/techno_princess/card_ai_princess.png";
 
 export const Card: React.FC = () => {
+    const [isCommandOpen, setIsCommandOpen] = useState(false)
+
+    const handleCommandClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.stopPropagation()
+        setIsCommandOpen(false)
+    }
+
     return (
-        <div className="w-28 cursor-pointer">
-            <div id="info" className="flex justify-center border-black bg-yellow-500 relative text-white">
-                <div className="absolute -top-3 -left-5 rounded-full  px-3 py-1 border-black bg-blue-800 text-amber-100 font-semibold">3</div>
+        <div className="w-28 cursor-pointer" onClick={() => setIsCommandOpen(true)}>
+            {isCommandOpen && (
+                <div
+                    className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex justify-center items-center z-10"
+                >
+                    <div className="bg-stone-900 p-2 rounded-md grid grid-cols-2 grid-rows-2 gap-2">
+                        {[1, 2, 3, 4].map((number) => (
+                            <div key={number} className="p-4 border-2 border-amber-300 rounded-md text-white font-semibold"
+                                onClick={(e) => handleCommandClose(e)}>
+                                {number}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+            <div id="info" className="flex justify-center bg-yellow-500 relative text-white">
+                <div className="absolute -top-4 -left-6 rounded-full  px-3 py-1 border-2 border-stone-900 bg-blue-800 text-amber-100 font-semibold">3</div>
                 <div className="font-semibold">Princess AI</div>
             </div>
             <img src={aiprincess} alt="ai_princess" className="w-28 h-28 rounded-sm" />
@@ -19,6 +41,7 @@ export const Card: React.FC = () => {
             <div className="flex flex-wrap bg-stone-900 rounded-b-md">
                 <p className="w-full text-xs text-white p-2"><span className="text-red-500 font-bold">Effect: </span>Search princess</p>
             </div>
+
         </div>
     )
 }
