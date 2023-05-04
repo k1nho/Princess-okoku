@@ -15,7 +15,7 @@ export const PlayField: React.FC<props> = ({ isEnemyField }) => {
                 <Card key={`${invocation}-3`}></Card>
                 <Card key={`${invocation}-4`}></Card>
             </div>
-            <div id="spell-zone" className="flex gap-10 bg-green-700">
+            <div id="spell-zone" className="flex gap-10">
                 <Card key={`${spell}-1`}></Card>
                 <Card key={`${spell}-2`}></Card>
                 <Card key={`${spell}-3`}></Card>
