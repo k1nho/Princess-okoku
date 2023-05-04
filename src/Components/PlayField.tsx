@@ -1,12 +1,13 @@
-import { Card } from "./Card"
+import { Card } from "./Card";
+import { CardControls } from "./CardControls";
 
 interface props {
-    isEnemyField: boolean
+    isEnemyField: boolean;
 }
 
 export const PlayField: React.FC<props> = ({ isEnemyField }) => {
-    const invocation = isEnemyField ? "einvocation" : "invocation"
-    const spell = isEnemyField ? "espell" : "spell"
+    const invocation = isEnemyField ? "einvocation" : "invocation";
+    const spell = isEnemyField ? "espell" : "spell";
     return (
         <div className="flex flex-col justify-center items-center space-y-5">
             <div id="invocation-zone" className="flex gap-10">
@@ -21,6 +22,8 @@ export const PlayField: React.FC<props> = ({ isEnemyField }) => {
                 <Card key={`${spell}-3`}></Card>
                 <Card key={`${spell}-4`}></Card>
             </div>
+
         </div>
-    )
-}
+
+    );
+};

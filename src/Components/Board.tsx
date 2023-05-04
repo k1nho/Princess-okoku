@@ -1,3 +1,4 @@
+import { CardControls } from "./CardControls"
 import { PlayField } from "./PlayField"
 
 export const Board: React.FC = () => {
@@ -11,8 +12,11 @@ export const Board: React.FC = () => {
                     Turn
                 </div>
             </div>
-            <div className="absolute bottom-4 right-4 p-4">
+            <div className="absolute bottom-4 right-4 p-4 flex">
                 <PlayField isEnemyField={false}></PlayField>
+            </div>
+            <div className="absolute left-10 bottom-10 p-4">
+                <CardControls />
             </div>
         </div>
     )
