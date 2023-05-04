@@ -1,4 +1,6 @@
-export const CardPool = [
+import { Card } from "./types";
+
+export const CardPool: Card[] = [
     { id: "1", name: "card_ai_princess", atk: 6, def: 6, cost: 7, special: "instantdmg 3" },
     { id: "2", name: "card_mini_princess", atk: 1, def: 2, cost: 1, special: "" },
     { id: "3", name: "card_princess_wifi", atk: 3, def: 1, cost: 3, special: "" },
