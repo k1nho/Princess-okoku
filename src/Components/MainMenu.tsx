@@ -1,5 +1,5 @@
 import usePlayerStore from "../store/store";
-import { GiQueenCrown, GiInfo } from "react-icons/gi";
+import { GiQueenCrown, GiInfo, GiCrown } from "react-icons/gi";
 import { StaticCard } from "./StaticCard";
 import { motion } from "framer-motion"
 
@@ -8,6 +8,9 @@ export const MainMenu: React.FC = () => {
     return (
         <>
             <div className="flex flex-col space-y-10 justify-center items-center min-h-screen bg-stone-800 relative">
+                <motion.div animate={{ y: 50 }} transition={{ delay: 1, ease: "easeInOut" }} className="text-8xl text-pink-500">
+                    <GiCrown />
+                </motion.div>
                 <motion.div className="absolute top-10 left-6" animate={{ x: 100, y: 100, rotate: -25 }} transition={{ duration: 1 }}><StaticCard /></motion.div>
                 <motion.div className="absolute bottom-0 right-10" animate={{ x: -80, y: -50, rotate: -25 }} transition={{ duration: 1 }}><StaticCard /></motion.div>
                 <motion.div className="absolute top-10 right-6" animate={{ x: -60, y: 80, rotate: 30 }} transition={{ duration: 1 }}><StaticCard /></motion.div>
