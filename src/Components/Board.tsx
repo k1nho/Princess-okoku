@@ -1,9 +1,12 @@
 import { CardControls } from "./CardControls"
 import { PlayField } from "./PlayField"
+import ice_moon from "../assets/bgs/stage_ice_moon.png"
+import machina_world from "../assets/bgs/state_machina_world.png"
+import space_vortex from "../assets/bgs/state_space_vortex.png"
 
 export const Board: React.FC = () => {
     return (
-        <div className="flex-col relative h-screen">
+        <div className="flex-col relative h-screen bg-cover bg-center" style={{ backgroundImage: `url(${space_vortex})` }}>
             <div className="absolute top-4 left-4 p-4">
                 <PlayField isEnemyField={true}></PlayField>
             </div>
