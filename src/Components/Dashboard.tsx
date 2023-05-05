@@ -22,13 +22,16 @@ export const Dashboard: React.FC = () => {
                     <div className="flex items-center justify-center font-semibold text-base space-x-10 py-1">
                         <div className="">{playerName}</div>
                         <div className="">Level {level}</div>
-                        <button
-                            className=" flex items-center space-x-2 bg-stone-900 rounded-full px-4 py-2 hover:bg-stone-700 transition ease-in-out duration-700"
-                            onClick={() => setGameMode("Battle")}
-                        >
-                            <p>Battle</p>
-                            <RiSwordFill />
-                        </button>
+                        {!tutorial &&
+                            <button
+                                className=" flex items-center space-x-2 bg-stone-900 rounded-full px-4 py-2 hover:bg-stone-700 transition ease-in-out duration-700"
+                                onClick={() => setGameMode("Battle")}
+                            >
+                                <p>Explore</p>
+                                <RiSwordFill />
+                            </button>
+
+                        }
                         <button className="text-xl" onClick={() => setGameMode("MainMenu")}>
                             <GiExitDoor />
                         </button>
