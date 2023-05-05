@@ -23,7 +23,7 @@ export const StaticCard: React.FC<props> = ({ id }) => {
                 </div>
             </div>
             <div className="flex flex-wrap bg-stone-900 rounded-b-md">
-                {card.special ? <p className="w-full text-xs text-white p-2"><span className="text-red-500 font-bold">Effect: </span>Instant damage 2</p> : <></>}
+                {card.description ? <p className="w-full text-xs text-white p-2"><span className="text-red-500 font-bold">Effect: </span>{card.description}</p> : <></>}
             </div>
         </div >
 
