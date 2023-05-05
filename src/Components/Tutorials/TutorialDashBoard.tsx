@@ -36,7 +36,7 @@ export const TutorialDashboard: React.FC = () => {
     return (
         <div className="min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 flex flex-col justify-center items-center space-y-4">
             {renderStep()}
-            <div className="flex justify-center items-center space-x-4">
+            <div className="flex justify-center items-center space-x-4 p-4">
                 {step !== 1 && (
                     <div onClick={handlePrevStep}>
                         <button className="bg-stone-900 hover:bg-stone-800 group transition inline-flex items-center rounded-full px-4 py-1.5 font-semibold text-white">

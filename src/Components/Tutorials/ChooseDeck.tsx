@@ -4,6 +4,13 @@ import usePlayerStore from "../../store/store";
 
 export const ChooseDeck: React.FC = () => {
     const [setDeck] = usePlayerStore((state) => [state.setDeck]);
+
+    const handleSetDeck = (l: number, r: number) => {
+        localStorage.setItem("playerdeckl", l.toString())
+        localStorage.setItem("playerdeckr", r.toString())
+        setDeck(l, r)
+    }
+
     return (
         <div className="flex flex-col">
             <div className="flex justify-center font-semibold text-2xl p-2">
@@ -15,7 +22,7 @@ export const ChooseDeck: React.FC = () => {
                 <div
                     id="techno-princess"
                     className="w-1/2 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900 to-indigo-500 rounded-lg p-1 cursor-pointer"
-                    onClick={() => setDeck(0, 12)}
+                    onClick={() => handleSetDeck(0, 12)}
                 >
                     <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
                         <h1>Techno Princess</h1>
@@ -51,7 +58,7 @@ export const ChooseDeck: React.FC = () => {
                 <div
                     id="dragon-empire"
                     className=" w-1/2 bg-gradient-to-r from-orange-600 to-orange-500 rounded-lg p-1 cursor-pointer"
-                    onClick={() => setDeck(13, 24)}
+                    onClick={() => handleSetDeck(12, 24)}
                 >
                     <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
                         <h1>Dragon Empire</h1>
