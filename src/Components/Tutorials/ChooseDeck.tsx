@@ -1,6 +1,9 @@
+import { motion } from "framer-motion";
 import { StaticCard } from "../StaticCard";
+import usePlayerStore from "../../store/store";
 
 export const ChooseDeck: React.FC = () => {
+    const [setDeck] = usePlayerStore((state) => [state.setDeck]);
     return (
         <div className="flex flex-col">
             <div className="flex justify-center font-semibold text-2xl p-2">
@@ -11,15 +14,31 @@ export const ChooseDeck: React.FC = () => {
             <div className="flex  flex-wrap justify-evenly p-2">
                 <div
                     id="techno-princess"
-                    className="w-1/2 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900 to-indigo-500 rounded-lg p-1"
+                    className="w-1/2 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900 to-indigo-500 rounded-lg p-1 cursor-pointer"
+                    onClick={() => setDeck(0, 12)}
                 >
                     <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
                         <h1>Techno Princess</h1>
                     </div>
                     <div className="flex justify-center space-x-10">
-                        <StaticCard id="4" />
-                        <StaticCard id="1" />
-                        <StaticCard id="7" />
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        >
+                            <StaticCard id="4" />
+                        </motion.div>
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        >
+                            <StaticCard id="1" />
+                        </motion.div>
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        >
+                            <StaticCard id="7" />
+                        </motion.div>
                     </div>
                     <div className="flex flex-wrap font-semibold text-lg text-gray-100 text-center">
                         <p>
@@ -31,15 +50,31 @@ export const ChooseDeck: React.FC = () => {
                 </div>
                 <div
                     id="dragon-empire"
-                    className=" w-1/2 bg-gradient-to-r from-orange-600 to-orange-500 rounded-lg p-1"
+                    className=" w-1/2 bg-gradient-to-r from-orange-600 to-orange-500 rounded-lg p-1 cursor-pointer"
+                    onClick={() => setDeck(13, 24)}
                 >
                     <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
                         <h1>Dragon Empire</h1>
                     </div>
                     <div className="flex justify-center space-x-10">
-                        <StaticCard id="14" />
-                        <StaticCard id="13" />
-                        <StaticCard id="20" />
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        >
+                            <StaticCard id="14" />
+                        </motion.div>
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        >
+                            <StaticCard id="20" />
+                        </motion.div>
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        >
+                            <StaticCard id="13" />
+                        </motion.div>
                     </div>
                     <div className="flex flex-wrap font-semibold text-lg text-gray-100 text-center">
                         <p>
@@ -57,9 +92,19 @@ export const ChooseDeck: React.FC = () => {
                         <h1>Sweet Dolls</h1>
                     </div>
                     <div className="flex justify-center space-x-10">
-                        <StaticCard id="14" />
-                        <StaticCard id="1" />
-                        <StaticCard id="7" />
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        ></motion.div>
+
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        ></motion.div>
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        ></motion.div>
                     </div>
                     <div className="flex flex-wrap font-semibold text-lg text-gray-100 text-center">
                         <p>
@@ -78,9 +123,19 @@ export const ChooseDeck: React.FC = () => {
                         <h1>Spirit Fairies</h1>
                     </div>
                     <div className="flex justify-center space-x-10">
-                        <StaticCard id="14" />
-                        <StaticCard id="1" />
-                        <StaticCard id="7" />
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        ></motion.div>
+
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        ></motion.div>
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        ></motion.div>
                     </div>
                     <div className="flex flex-wrap font-semibold text-lg text-gray-100 text-center">
                         <p>

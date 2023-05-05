@@ -2,23 +2,21 @@ import { useState } from "react";
 import usePlayerStore from "../../store/store";
 import { Welcome } from "./Welcome";
 import { ChooseDeck } from "./ChooseDeck";
+import { ConfirmDeck } from "./ConfirmDeck";
 
 export const TutorialDashboard: React.FC = () => {
     const [step, setStep] = useState(1);
-    const [btnText, setBtnText] = useState("Choose Deck");
-    const [setTutorial] = usePlayerStore((state) => [state.setTutorial]);
+    const [setTutorial, deck] = usePlayerStore((state) => [state.setTutorial, state.deck]);
     const cancelTutorial = () => {
         localStorage.setItem("isTutorial", "0");
         setTutorial();
     };
 
     const handleNextStep = () => {
-        if (step + 1 === 2) setBtnText("Finish");
         setStep(step + 1);
     };
 
     const handlePrevStep = () => {
-        if (step - 1 === 1) setBtnText("Choose Deck");
         setStep(step - 1);
     };
 
@@ -29,14 +27,14 @@ export const TutorialDashboard: React.FC = () => {
             case 2:
                 return <ChooseDeck />;
             case 3:
-                return <p>Step 3: More text here</p>;
+                return <ConfirmDeck />;
             default:
                 return <></>;
         }
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 space-y-4">
+        <div className="min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 flex flex-col justify-center items-center space-y-4">
             {renderStep()}
             <div className="flex justify-center items-center space-x-4">
                 {step !== 1 && (
@@ -64,9 +62,8 @@ export const TutorialDashboard: React.FC = () => {
                     </div>
                 )}
                 {step !== 3 ? (
-                    <div onClick={handleNextStep}>
-                        <button className=" bg-stone-900 hover:bg-stone-800 group transition inline-flex items-center rounded-full px-4 py-1.5 font-semibold text-white">
-                            {btnText}
+                    <button className=" bg-stone-900 hover:bg-stone-800 group transition inline-flex items-center rounded-full px-4 py-1.5 font-semibold text-white" onClick={handleNextStep} disabled={deck.length === 0 && step !== 1}>
+                        {deck.length === 0 && step != 1 ? "Choose Deck" : <>Continue
                             <svg
                                 className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
                                 fill="none"
@@ -84,8 +81,8 @@ export const TutorialDashboard: React.FC = () => {
                                     d="M1 1l4 4-4 4"
                                 ></path>
                             </svg>
-                        </button>
-                    </div>
+                        </>}
+                    </button>
                 ) : (
                     <div onClick={cancelTutorial}>
                         <button className="bg-stone-900 hover:bg-stone-800 group transition inline-flex items-center rounded-full px-4 py-1.5 font-semibold text-white">
