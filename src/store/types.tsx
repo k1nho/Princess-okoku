@@ -5,7 +5,8 @@ export interface Card {
     cost: number,
     atk: number,
     def: number,
-    special: string
+    special: string,
+    description: string
 }
 
 export interface PlayerInfo {
