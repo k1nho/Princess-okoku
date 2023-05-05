@@ -1,5 +1,6 @@
 import { Board } from "./Components/Board";
 import { Dashboard } from "./Components/Dashboard";
+import { Learn } from "./Components/Learn";
 import { MainMenu } from "./Components/MainMenu";
 import { StoryBoard } from "./Components/StoryBoard";
 import usePlayerStore from "./store/store";
@@ -16,6 +17,10 @@ function App() {
 
     else if (gameMode === "Story") {
         return <StoryBoard />
+    }
+
+    else if (gameMode === "Learn") {
+        return <Learn />
     }
 
     return (
