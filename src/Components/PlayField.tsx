@@ -1,5 +1,4 @@
 import { Card } from "./Card";
-import { CardControls } from "./CardControls";
 
 interface props {
     isEnemyField: boolean;

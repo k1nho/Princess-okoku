@@ -1,7 +1,7 @@
 import usePlayerStore from "../store/store";
 import { RiSwordFill } from "react-icons/ri";
 import { GiExitDoor } from "react-icons/gi";
-import { TutorialDashboard } from "./TutorialDashBoard";
+import { TutorialDashboard } from "./Tutorials/TutorialDashBoard";
 import { PlayerStats } from "./PlayerStats";
 
 export const Dashboard: React.FC = () => {
@@ -14,7 +14,7 @@ export const Dashboard: React.FC = () => {
 
     return (
         <div>
-            <div className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 sticky top-0 z-50">
+            <div className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
                 <div className="flex justify-between md:justify-around mx-auto w-10/12 py-4 text-white">
                     <h1 className="text-2xl md:text-3xl transition duration-200 focus:outline-none font-semibold">
                         Princess Okoku
