@@ -22,10 +22,6 @@ export const TutorialDashboard: React.FC = () => {
         setStep(step - 1);
     };
 
-    const handleReset = () => {
-        setStep(1);
-    };
-
     const renderStep = () => {
         switch (step) {
             case 1:
@@ -42,7 +38,7 @@ export const TutorialDashboard: React.FC = () => {
     return (
         <div className="min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 space-y-4">
             {renderStep()}
-            <div className="flex justify-center">
+            <div className="flex justify-center items-center space-x-4">
                 {step !== 1 && (
                     <div onClick={handlePrevStep}>
                         <button className="bg-stone-900 hover:bg-stone-800 group transition inline-flex items-center rounded-full px-4 py-1.5 font-semibold text-white">
@@ -92,8 +88,8 @@ export const TutorialDashboard: React.FC = () => {
                     </div>
                 ) : (
                     <div onClick={cancelTutorial}>
-                        <button className="bg-gradient-to-r from-green-300 to-purple-400  group transition inline-flex items-center rounded-full px-4 py-1.5 font-semibold text-white">
-                            {btnText}
+                        <button className="bg-stone-900 hover:bg-stone-800 group transition inline-flex items-center rounded-full px-4 py-1.5 font-semibold text-white">
+                            Start Adventure
                             <svg
                                 className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
                                 fill="none"

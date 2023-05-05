@@ -6,11 +6,11 @@ interface props {
 
 export const StaticCard: React.FC<props> = ({ id }) => {
     const card = id ? getCard(id) : getCard("1")
+
     return (
 
         <div className="w-28">
             <div id="info" className="flex justify-center bg-yellow-500 relative text-white">
-                <div className="absolute -top-4 -left-6 rounded-full  px-3 py-1 border-2 border-stone-900 bg-blue-800 text-amber-100 font-semibold">{card.cost}</div>
                 <div className="font-semibold">{card.name}</div>
             </div>
             <img src={card.iml} alt={card.name} className="w-28 h-28 rounded-sm" />
