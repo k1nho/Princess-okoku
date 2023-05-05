@@ -13,7 +13,7 @@ export const Dashboard: React.FC = () => {
     ]);
 
     return (
-        <div>
+        <div className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
             <div className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
                 <div className="flex justify-between md:justify-around mx-auto w-10/12 py-4 text-white">
                     <h1 className="text-2xl md:text-3xl transition duration-200 focus:outline-none font-semibold">
