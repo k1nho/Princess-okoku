@@ -40,4 +40,5 @@ export const cardpool: Card[] = [
     { id: "29", name: "Yia Twin", iml: "src/assets/decks/spirit_fairies/card_yia_fairy.png", atk: 1, def: 2, cost: 2, special: "search 28", description: "Search Yai Twin" },
     { id: "30", name: "Alance", iml: "src/assets/decks/spirit_fairies/card_balance_fairy.png", atk: 4, def: 2, cost: 4, special: "instantatk 1", description: "Instant attack 1" },
     { id: "31", name: "Ballet Fairy", iml: "src/assets/decks/spirit_fairies/card_ballet_fairy.png", atk: 2, def: 1, cost: 1, special: "instantatk 1", description: "Instant attack 1" },
+    { id: "32", name: "Terra", iml: "src/assets/decks/spirit_fairies/card_health_fairy.png", atk: 3, def: 2, cost: 2, special: "instanthp 3", description: "Instant hp 3" },
 ]
