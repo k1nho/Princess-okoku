@@ -38,14 +38,14 @@ export const Card: React.FC<props> = ({ id }) => {
             <img src={card.iml} alt="ai_princess" className="w-28 h-28 rounded-sm" />
             <div className="flex justify-between text-amber-100 font-semibold bg-stone-900">
                 <div className="bg-red-700 rounded-br px-3 py-1 flex items-center justify-center">
-                    {card.atk}
+                    {card.atk > 0 ? card.atk : "S"}
                 </div>
                 <div className="bg-blue-700 rounded-bl px-3 py-1 flex items-center justify-center">
-                    {card.def}
+                    {card.def > 0 ? card.def : "S"}
                 </div>
             </div>
             <div className="flex flex-wrap bg-stone-900 rounded-b-md">
-                {card.description ? <p className="w-full text-xs text-white p-2"><span className="text-red-500 font-bold">Effect: </span>{card.description}</p> : <></>}
+                {card.description ? <p className="w-full text-xs text-white p-2"><span className="text-red-500 font-bold">Effect: </span>{card.description}</p> : <p className="w-full text-xs text-white p-2">Normal card</p>}
             </div>
 
         </div>
