@@ -12,7 +12,6 @@ export const Welcome: React.FC = () => {
                     exciting journey through the magical kingdom of Althreisha! Are you
                     ready to help Princess Kaede in her quest to uncover the truth and
                     solve the mysteries that surround the creatures of this wondrous land?
-
                 </p>
                 <p className="mb-4 text-white font-semibold text-lg text-center">
                     In this game, you will join Princess Kaede and her friends on an
@@ -22,10 +21,10 @@ export const Welcome: React.FC = () => {
                     excitement.
                 </p>
                 <p className="mb-4 text-white font-semibold text-lg text-center">
-                    To begin your adventure, simply choose your character and start
-                    exploring the kingdom. As you progress through the game, you will
-                    collect cards that can be used in battle to defeat your enemies and
-                    gain more power.
+                    To begin your adventure, simply choose your deck and start exploring
+                    the kingdom. As you progress through the game, you will collect more
+                    decks that can be used in battle to explore Althreisha with unique
+                    strategies.
                 </p>
                 <p className="mb-4 text-white font-semibold text-lg text-center">
                     Remember, this is a turn-based game, which means you will need to
@@ -35,8 +34,8 @@ export const Welcome: React.FC = () => {
                 </p>
                 <p className="mb-4 text-white font-semibold text-lg text-center">
                     Are you ready to join Princess Kaede on her quest for truth and
-                    adventure? Let's get started and see where the journey takes us in
-                    the magical kingdom of Althreisha!
+                    adventure? Let's get started and see where the journey takes us in the
+                    magical kingdom of Althreisha!
                 </p>
             </div>
         </div>
