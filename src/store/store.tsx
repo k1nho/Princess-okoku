@@ -45,19 +45,8 @@ const initialBattleInfo: BattleInfo = {
 }
 
 
-const startGame = {
-    tutorial: localStorage.getItem("isTutorial") ? false : true,
-    owned: [],
-    deck: [],
-    info: initialInfo,
-    battleInfo: initialBattleInfo,
-    enemyBattleInfo: initialBattleInfo,
-    gameMode: "MainMenu",
-    level: 0,
-    cardsCollected: 0
-}
 
-const cardPlaceholder = cardpool[0]
+
 
 const isnewCard = (id: string, owned: Card[]) => {
     owned.forEach((card) => {
@@ -69,7 +58,7 @@ const isnewCard = (id: string, owned: Card[]) => {
 }
 
 export const getCard = (id: string): Card => {
-    let res = cardPlaceholder
+    let res = cardpool[0]
     for (let i = 0; i < cardpool.length; i++) {
         if (cardpool[i].id === id) {
             res = cardpool[i];
@@ -90,7 +79,32 @@ const removeCard = (id: string, deck: Card[]): Card[] => {
     return cards.filter((card) => card.id !== id);
 }
 
+const returnBounds = (): [boolean, number, number] => {
+    let l = -1;
+    let r = -1;
+    const storedl = localStorage.getItem("playerdeckl")
+    const storedr = localStorage.getItem("playerdeckr")
+    if (storedl !== null && storedr !== null) {
+        l = parseInt(storedl, 10)
+        r = parseInt(storedr, 10)
+        return [true, l, r]
+    }
+    else return [false, l, r]
+}
 
+const cachedDeck = returnBounds()
+
+const startGame = {
+    tutorial: localStorage.getItem("isTutorial") ? false : true,
+    owned: [],
+    deck: cachedDeck[0] ? getDeck(cachedDeck[1], cachedDeck[2]) : [],
+    info: initialInfo,
+    battleInfo: initialBattleInfo,
+    enemyBattleInfo: initialBattleInfo,
+    gameMode: "MainMenu",
+    level: 0,
+    cardsCollected: 0
+}
 
 
 const usePlayerStore = create<PlayerStore>()((set) => ({
