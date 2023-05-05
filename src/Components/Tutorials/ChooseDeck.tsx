@@ -38,8 +38,8 @@ export const ChooseDeck: React.FC = () => {
                     </div>
                     <div className="flex justify-center space-x-10">
                         <StaticCard id="14" />
-                        <StaticCard id="1" />
-                        <StaticCard id="7" />
+                        <StaticCard id="13" />
+                        <StaticCard id="16" />
                     </div>
                     <div className="flex flex-wrap font-semibold text-lg text-gray-100 text-center">
                         <p>
