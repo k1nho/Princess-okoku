@@ -22,6 +22,7 @@ interface PlayerStore {
     setWins: () => void
     setLosses: () => void
     setLevel: () => void
+    setDeck: (l: number, r: number) => void
     setCardsCollected: (id: string) => void
     addCardToOwned: (id: string) => void;
     addCardToDeck: (id: string) => void;
@@ -80,10 +81,16 @@ export const getCard = (id: string): Card => {
 
 }
 
+const getDeck = (l: number, r: number): Card[] => {
+    return cardpool.slice(l, r)
+}
+
 const removeCard = (id: string, deck: Card[]): Card[] => {
     const cards = deck
     return cards.filter((card) => card.id !== id);
 }
+
+
 
 
 const usePlayerStore = create<PlayerStore>()((set) => ({
@@ -97,7 +104,8 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
     addCardToOwned: (id: string) => set((state) => ({ owned: [...state.owned, getCard(id)] })),
     addCardToDeck: (id: string) => set((state) => ({ deck: [...state.deck, getCard(id)] })),
     removeCardfromDeck: (id: string) => set((state) => ({ deck: removeCard(id, state.deck) })),
-    setTutorial: () => set(() => ({ tutorial: false }))
+    setTutorial: () => set(() => ({ tutorial: false })),
+    setDeck: (l: number, r: number) => set(() => ({ deck: getDeck(l, r) })),
 }));
 
 export default usePlayerStore;
