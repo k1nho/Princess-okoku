@@ -1,5 +1,5 @@
 import usePlayerStore from "../store/store";
-import { GiSpellBook, GiTreasureMap } from "react-icons/gi";
+import { GiSpellBook, GiTreasureMap, GiCogLock } from "react-icons/gi";
 
 export const PlayerStats: React.FC = () => {
     const [info, setGameMode] = usePlayerStore((state) => [state.info, state.setGameMode]);
@@ -20,6 +20,12 @@ export const PlayerStats: React.FC = () => {
                         <p>Read Story</p>
                         <GiSpellBook />
                     </button>
+                    <button className="flex items-center space-x-2 bg-stone-900 rounded-full px-4 py-2 hover:bg-stone-700 transition ease-in-out duration-700 text-white" onClick={() => setGameMode("Learn")}>
+                        <p>Learn</p>
+                        <GiCogLock />
+                    </button>
+
+
                 </div>
             </div>
             <div className="flex flex-col justify-center items-center rounded-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ">
