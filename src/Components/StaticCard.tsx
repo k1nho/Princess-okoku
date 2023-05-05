@@ -5,9 +5,7 @@ interface props {
 }
 
 export const StaticCard: React.FC<props> = ({ id }) => {
-    console.log(id)
     const card = id ? getCard(id) : getCard("1")
-    console.log(card)
     return (
 
         <div className="w-28">
