@@ -124,7 +124,8 @@ export const ChooseDeck: React.FC = () => {
 
                 <div
                     id="spirit-fairies"
-                    className="w-1/2 bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-fuchsia-300 via-green-400 to-rose-700 rounded-lg p-4"
+                    className="w-1/2 bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-fuchsia-300 via-green-400 to-rose-700 rounded-lg p-4 cursor-pointer"
+                    onClick={() => handleSetDeck(24, 36)}
                 >
                     <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
                         <h1>Spirit Fairies</h1>
@@ -133,16 +134,22 @@ export const ChooseDeck: React.FC = () => {
                         <motion.div
                             transition={{ duration: 0.5 }}
                             whileHover={{ scale: 1.1 }}
-                        ></motion.div>
+                        >
+                            <StaticCard id="28" />
+                        </motion.div>
 
                         <motion.div
                             transition={{ duration: 0.5 }}
                             whileHover={{ scale: 1.1 }}
-                        ></motion.div>
+                        >
+                            <StaticCard id="32" />
+                        </motion.div>
                         <motion.div
                             transition={{ duration: 0.5 }}
                             whileHover={{ scale: 1.1 }}
-                        ></motion.div>
+                        >
+                            <StaticCard id="29" />
+                        </motion.div>
                     </div>
                     <div className="flex flex-wrap font-semibold text-lg text-gray-100 text-center">
                         <p>
