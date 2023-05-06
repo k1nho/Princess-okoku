@@ -18,8 +18,9 @@ export interface PlayerInfo {
 
 export interface BattleInfo {
     deck: Card[],
-    handCards: Card[],
-    playedCards: Card[],
+    drawPos: number,
+    handCards: (Card | null)[],
+    playedCards: (Card | null)[],
     lp: number,
     energy: number
 }

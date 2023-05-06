@@ -15,6 +15,7 @@ interface PlayerStore {
     gameMode: string;
     battleInfo: BattleInfo;
     enemyBattleInfo: BattleInfo;
+    battleWinCond: boolean;
     setTutorial: () => void;
     setGameMode: (mode: string) => void;
     setName: (name: string) => void;
@@ -22,9 +23,19 @@ interface PlayerStore {
     setLosses: () => void;
     setLevel: () => void;
     setDeck: (l: number, r: number) => void;
+    setBattleDeck: () => void;
     addCardToDeck: (id: string) => void;
     removeCardfromDeck: (id: string) => void;
+    prepareDraw: () => void;
+    addCardToHand: () => void;
+    removeCardFromHand: () => void;
+    addCardToPlay: (pos: number) => void;
+    removeCardFromPlay: () => void;
+    setWinCond: () => void;
+    finishBattle: () => void;
 }
+
+const placeholder = cardpool[0];
 
 const initialInfo: PlayerInfo = {
     id: playerid,
@@ -35,8 +46,9 @@ const initialInfo: PlayerInfo = {
 
 const initialBattleInfo: BattleInfo = {
     deck: [],
-    handCards: [],
-    playedCards: [],
+    drawPos: 12,
+    handCards: [null, null, null, null, null],
+    playedCards: [null, null, null, null, null, null, null, null],
     lp: 10,
     energy: 1,
 };
@@ -82,9 +94,54 @@ const startGame = {
     info: initialInfo,
     battleInfo: initialBattleInfo,
     enemyBattleInfo: initialBattleInfo,
+    battleWinCond: false,
     gameMode: "MainMenu",
     level: 0,
     cardsCollected: 0,
+};
+
+/* BATTLE MECHANICS */
+const draw = (deck: Card[], cardsInHand: (Card | null)[], drawPos: number) => {
+    const rp = cardsInHand.indexOf(null)
+    console.log(rp)
+    console.log(cardsInHand)
+    console.log(drawPos)
+    console.log(deck)
+    console.log(deck[drawPos])
+    if (drawPos < 0) return cardsInHand;
+    console.log([...cardsInHand.slice(0, rp), deck[drawPos], ...cardsInHand.slice(rp + 1)])
+    return [...cardsInHand.slice(0, rp), deck[drawPos], ...cardsInHand.slice(rp + 1)]
+
+};
+
+const removeCardFromHand = (cardsInHand: (Card | null)[], idx: string) => {
+    return cardsInHand.filter((card) => {
+        if (card === null) return true;
+        return card.id !== idx;
+    });
+};
+
+const addCardToPlay = (cardsInPlay: (Card | null)[], card: Card, pos: number) => {
+    const field = cardsInPlay;
+    field[pos] = card;
+    return field;
+};
+
+const removeCardFromPlay = (cardsInPlay: (Card | null)[], idx: string) => {
+    return cardsInPlay.filter((card) => {
+        if (card === null) return true;
+        return card.id !== idx;
+    });
+};
+
+const checkWinCond = (
+    lp: number,
+    elp: number,
+    decksize: number,
+    edecksize: number
+): boolean => {
+    if (lp <= 0 || elp <= 0 || decksize === 0 || edecksize === 0) return true;
+    return false;
 };
 
 const usePlayerStore = create<PlayerStore>()((set) => ({
@@ -108,7 +165,69 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
     removeCardfromDeck: (id: string) =>
         set((state) => ({ deck: removeCard(id, state.deck) })),
     setTutorial: () => set(() => ({ tutorial: false })),
-    setDeck: (l: number, r: number) => set(() => ({ deck: getDeck(l, r) })),
+    setDeck: (l: number, r: number) =>
+        set((state) => ({
+            deck: getDeck(l, r),
+            battleInfo: { ...state.battleInfo, deck: getDeck(l, r) },
+        })),
+    setBattleDeck: () => set((state) => ({ battleInfo: { ...state.battleInfo, deck: state.deck } })),
+    prepareDraw: () => set((state) => ({ battleInfo: { ...state.battleInfo, drawPos: state.battleInfo.drawPos - 1 } })),
+    addCardToHand: () =>
+        set((state) => ({
+            battleInfo: {
+                ...state.battleInfo,
+                handCards: draw(state.battleInfo.deck, state.battleInfo.handCards, state.battleInfo.drawPos),
+            },
+        })),
+    removeCardFromHand: () =>
+        set((state) => ({
+            battleInfo: {
+                ...state.battleInfo,
+                handCards: removeCardFromHand(state.battleInfo.handCards, "1"),
+            },
+        })),
+    addCardToPlay: (pos: number) =>
+        set((state) => ({
+            battleInfo: {
+                ...state.battleInfo,
+                playedCards: addCardToPlay(state.battleInfo.playedCards, placeholder, pos),
+            },
+        })),
+    removeCardFromPlay: () =>
+        set((state) => ({
+            battleInfo: {
+                ...state.battleInfo,
+                playedCards: removeCardFromPlay(state.battleInfo.playedCards, "1"),
+            },
+        })),
+    setWinCond: () =>
+        set((state) => ({
+            battleWinCond: checkWinCond(
+                state.battleInfo.lp,
+                state.enemyBattleInfo.lp,
+                state.battleInfo.deck.length,
+                state.enemyBattleInfo.deck.length
+            ),
+        })),
+    finishBattle: () => set((state) => ({
+        battleInfo: {
+            deck: state.deck,
+            handCards: [null, null, null, null, null],
+            drawPos: 12,
+            playedCards: [null, null, null, null, null, null, null, null],
+            lp: 10,
+            energy: 1,
+        },
+        enemyBattleInfo: {
+            deck: state.enemyBattleInfo.deck,
+            handCards: [null, null, null, null, null],
+            drawPos: 12,
+            playedCards: [null, null, null, null, null, null, null, null],
+            lp: 10,
+            energy: 1,
+
+        }
+    }))
 }));
 
 export default usePlayerStore;

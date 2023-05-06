@@ -44,5 +44,5 @@ export const cardpool: Card[] = [
     { id: "33", name: "Fairy Dress", iml: "src/assets/decks/spirit_fairies/qp_fairy_dress.png", atk: -1, def: -1, cost: 1, special: "instanthp 1", description: "Instant hp 1" },
     { id: "34", name: "Spirit Boost", iml: "src/assets/decks/spirit_fairies/qp_spirit_boost.png", atk: -1, def: -1, cost: 2, special: "instantatk 2", description: "Instant attack 2" },
     { id: "35", name: "Spirit Heal", iml: "src/assets/decks/spirit_fairies/qp_spirit_heal.png", atk: -1, def: -1, cost: 2, special: "instanthp 2", description: "Instant hp 2" },
-    { id: "36", name: "Magic Wand", iml: "src/assets/decks/spirit_fairies/qp_spirit_heal.png", atk: -1, def: -1, cost: 1, special: "search 29", description: "Search Yia Twin" },
+    { id: "36", name: "Magic Wand", iml: "src/assets/decks/spirit_fairies/qp_magic_wand.png", atk: -1, def: -1, cost: 1, special: "search 29", description: "Search Yia Twin" },
 ]
