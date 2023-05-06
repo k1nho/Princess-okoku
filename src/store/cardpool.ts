@@ -2,7 +2,7 @@ import { Card } from "./types";
 
 // (0,12) Techno Princess Deck
 // (13, 24) Dragon Empire Deck
-// (25, 25) Spirit Fairies Empire Deck
+// (25, 36) Spirit Fairies Empire Deck
 export const cardpool: Card[] = [
     { id: "1", name: "AI Princess", iml: "src/assets/decks/techno_princess/card_ai_princess.png", atk: 6, def: 6, cost: 7, special: "instantdmg 3", description: "instant damage 3" },
     { id: "2", name: "Mini Princess", iml: "src/assets/decks/techno_princess/card_mini_princess.png", atk: 1, def: 2, cost: 1, special: "", description: "" },
@@ -41,4 +41,8 @@ export const cardpool: Card[] = [
     { id: "30", name: "Alance", iml: "src/assets/decks/spirit_fairies/card_balance_fairy.png", atk: 4, def: 2, cost: 4, special: "instantatk 1", description: "Instant attack 1" },
     { id: "31", name: "Ballet Fairy", iml: "src/assets/decks/spirit_fairies/card_ballet_fairy.png", atk: 2, def: 1, cost: 1, special: "instantatk 1", description: "Instant attack 1" },
     { id: "32", name: "Terra", iml: "src/assets/decks/spirit_fairies/card_health_fairy.png", atk: 3, def: 2, cost: 2, special: "instanthp 3", description: "Instant hp 3" },
+    { id: "33", name: "Fairy Dress", iml: "src/assets/decks/spirit_fairies/qp_fairy_dress.png", atk: -1, def: -1, cost: 1, special: "instanthp 1", description: "Instant hp 1" },
+    { id: "34", name: "Spirit Boost", iml: "src/assets/decks/spirit_fairies/qp_spirit_boost.png", atk: -1, def: -1, cost: 2, special: "instantatk 2", description: "Instant attack 2" },
+    { id: "35", name: "Spirit Heal", iml: "src/assets/decks/spirit_fairies/qp_spirit_heal.png", atk: -1, def: -1, cost: 2, special: "instanthp 2", description: "Instant hp 2" },
+    { id: "36", name: "Magic Wand", iml: "src/assets/decks/spirit_fairies/qp_spirit_heal.png", atk: -1, def: -1, cost: 1, special: "search 29", description: "Search Yia Twin" },
 ]
