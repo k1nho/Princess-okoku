@@ -7,21 +7,21 @@ const content = [
         id: 1,
         title: "Princess Okoku",
         content:
-            "Princess Okoku is a turn-based card game, where you use a deck to progress to a story. The tutorial will reward you with one of four available decks (Techno Princess, Dragon Empire, Animal Dolls, Spirit Fairies) that you can use as you begin your adventure",
+            "Princess Okoku is a turn-based card game, where you use a deck to progress to a story. The tutorial will reward you with one of four available decks (Techno Princess, Dragon Empire, Animal Dolls, Spirit Fairies) that you can use as you begin your adventure.",
     },
 
     {
         id: 2,
         title: "Game Modes",
         content:
-            "Princess Okoku consists of one main game mode that you can find on the top right in explore button or the continue button in the Okoku center. This follows the main story line of Princess Okoku as you win battles more decks will be unlocked as well as stories about the worlds explore in that battle. Win battles to level up and unlock more decks and stories",
+            "Princess Okoku consists of one main game mode that you can find on the top right in explore button or the continue button in the Okoku center. This follows the main story line of Princess Okoku as you win battles more decks will be unlocked as well as stories about the worlds explore in that battle. Win battles to level up and unlock more decks and stories.",
     },
 
     {
         id: 3,
         title: "Game Mechanics",
         content:
-            "Princess Okoku is a card game where you take turns against the story bosses each with their own unique decks and mechanics. On one turn a player can use up to the total of energy points available to play cards from their hand into the field. If there are attackers on the field, all their effects, if any, resolve and then they can attack the attackers on the other field. When no attackers are left, the player can attack directly to the boss health. There are two ways to reach victory in Princess Okoku, by reducing the lifepoints to 0 or by thinning out a deck (the first player to reach 0 cards to draw losses)",
+            "Princess Okoku is a card game where you take turns against the story bosses each with their own unique decks and mechanics. On one turn a player can use up to the total of energy points available to play cards from their hand into the field. If there are attackers on the field, all their effects, if any, resolve and then they can attack the attackers on the other field. When no attackers are left, the player can attack directly to the boss health. There are two ways to reach victory in Princess Okoku, by reducing the lifepoints to 0 or by thinning out a deck (the first player to reach 0 cards to draw losses).",
     },
 
     {

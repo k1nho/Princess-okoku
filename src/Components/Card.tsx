@@ -1,19 +1,22 @@
 import { useState } from "react";
 import aiprincess from "../assets/decks/techno_princess/card_ai_princess.png";
-import { getCard } from "../store/store";
+import usePlayerStore, { getCard } from "../store/store";
 
 interface props {
     id?: string
 }
 
 export const Card: React.FC<props> = ({ id }) => {
+    const [playedCards, addCardToPlay, removeCardFromHand] = usePlayerStore((state) => [state.battleInfo.playedCards, state.addCardToPlay, state.removeCardFromHand])
     const [isCommandOpen, setIsCommandOpen] = useState(false)
     const card = id ? getCard(id) : getCard("1")
 
-    const handleCommandClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const handleCommandClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, pos: number) => {
         e.stopPropagation()
+        addCardToPlay(pos)
         setIsCommandOpen(false)
     }
+
 
     return (
         <div className="w-28 cursor-pointer" onClick={() => setIsCommandOpen(true)}>
@@ -21,13 +24,17 @@ export const Card: React.FC<props> = ({ id }) => {
                 <div
                     className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex justify-center items-center z-10"
                 >
-                    <div className="bg-stone-900 p-2 rounded-md grid grid-cols-2 grid-rows-2 gap-2">
-                        {[1, 2, 3, 4].map((number) => (
-                            <div key={number} className="p-4 border-2 border-amber-300 rounded-md text-white font-semibold"
-                                onClick={(e) => handleCommandClose(e)}>
-                                {number}
-                            </div>
-                        ))}
+                    <div className="p-2 rounded-md grid grid-cols-4 grid-rows-2 gap-2">
+                        {playedCards.map((card, pos) => {
+                            return card ?
+                                <div key={pos} className="p-4 border-2 bg-stone-900 border-amber-300 rounded-md text-white font-semibold"
+                                    onClick={(e) => { e.stopPropagation(); setIsCommandOpen(false) }}>
+                                    X
+                                </div> :
+                                <div className="bg-red-500 p-4 border-2 border-amber-300 rounded-md text-white font-semibold" onClick={(e) => handleCommandClose(e, pos)}>
+                                    {pos}
+                                </div>
+                        })}
                     </div>
                 </div>
             )}
@@ -47,7 +54,6 @@ export const Card: React.FC<props> = ({ id }) => {
             <div className="flex flex-wrap bg-stone-900 rounded-b-md">
                 {card.description ? <p className="w-full text-xs text-white p-2"><span className="text-red-500 font-bold">Effect: </span>{card.description}</p> : <p className="w-full text-xs text-white p-2">Normal card</p>}
             </div>
-
         </div>
     )
 }

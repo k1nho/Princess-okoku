@@ -1,6 +1,5 @@
 import { CardControls } from "./CardControls"
 import { PlayField } from "./PlayField"
-import space_vortex from "../assets/bgs/state_space_vortex.png"
 import cosmos from "../assets/bgs/stage_cosmos.png"
 
 export const Board: React.FC = () => {
@@ -10,7 +9,7 @@ export const Board: React.FC = () => {
                 <PlayField isEnemyField={true}></PlayField>
             </div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className=" text-4xl text-bold p-4">
+                <div className=" text-4xl text-bold p-4 text-white rounded-xl bg-gradient-to-r from-purple-400 to-pink-600 ">
                     Turn
                 </div>
             </div>

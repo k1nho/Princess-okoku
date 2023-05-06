@@ -60,7 +60,11 @@ export const PlayerStats: React.FC = () => {
                             <p>Coming Soon...</p>
                         </button>
                     </div>
-                    <div className="text-white space-y-1 rounded-xl p-2 bg-stone-600">
+                    <div className="text-white space-y-1 rounded-xl p-2 bg-stone-600 font-semibold">
+                        <h4 className="text-xl font-semibold text-center">Story Progression</h4>
+                        <h5 className="text-md text-left">Level: {level}</h5>
+                    </div>
+                    <div className="text-white space-y-1 rounded-xl p-2 bg-stone-600 font-semibold">
                         <div className="text-lg font-semibold text-center flex items-center justify-center space-x-2">
                             <GiLaurelCrown />
                             <p>
@@ -71,10 +75,7 @@ export const PlayerStats: React.FC = () => {
                         <div className="text-md text-left">Wins : {info.wins}</div>
                         <div className="text-md text-left">Losses : {info.losses}</div>
                     </div>
-                    <div>
-                        <h4 className="text-xl font-semibold text-center">Story Progression</h4>
-                        <h5 className="text-md text-left">Level: {level}</h5>
-                    </div>
+
                 </div>
                 <div className="flex flex-col justify-center bg-stone-900 space-y-4 p-6 rounded-xl">
                     <div>
