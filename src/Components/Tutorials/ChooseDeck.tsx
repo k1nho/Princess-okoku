@@ -50,8 +50,7 @@ export const ChooseDeck: React.FC = () => {
                     <div className="flex flex-wrap font-semibold text-lg text-gray-100 text-center">
                         <p>
                             The Techno Princess deck is a tactical deck with emphasis on its
-                            key ruler the AI Princess, combine these wonderful cyberpunk deck
-                            to make your way through Althreisha
+                            key ruler the AI Princess, hack your way through Althreisha with this wonderful cyberpunk deck
                         </p>
                     </div>
                 </div>
@@ -93,7 +92,7 @@ export const ChooseDeck: React.FC = () => {
                 </div>
                 <div
                     id="dolls"
-                    className="w-1/2 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg p-4"
+                    className="w-1/2 bg-gradient-to-r from-sky-400 to-blue-500 rounded-lg p-4"
                 >
                     <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
                         <h1>Sweet Dolls</h1>
