@@ -7,14 +7,15 @@ import { GiCrown } from "react-icons/gi"
 
 export const Board: React.FC = () => {
 
-    const [checkWinCond, turn, setGameMode, finishBattle] = usePlayerStore((state) => [state.battleWinCond, state.turn, state.setGameMode, state.finishBattle])
+    const [winCond, setWinCond, turn, setGameMode, finishBattle] = usePlayerStore((state) => [state.battleWinCond, state.setWinCond, state.turn, state.setGameMode, state.finishBattle])
 
     const handleVictory = () => {
         finishBattle()
         setGameMode("Dashboard")
+        setWinCond()
     }
 
-    if (checkWinCond) {
+    if (winCond) {
         return (
             <div className="flex flex-col justify-center items-center">
                 <div>
