@@ -5,16 +5,18 @@ import { TutorialDashboard } from "./Tutorials/TutorialDashBoard";
 import { PlayerStats } from "./PlayerStats";
 
 export const Dashboard: React.FC = () => {
-    const [tutorial, setGameMode, setBattleDeck, level, playerName] = usePlayerStore((state) => [
+    const [tutorial, setGameMode, setBattleDeck, setFirstRoundHand, level, playerName] = usePlayerStore((state) => [
         state.tutorial,
         state.setGameMode,
         state.setBattleDeck,
+        state.setFirstRoundHand,
         state.level,
         state.info.name,
     ]);
 
     const handleExplore = () => {
         setBattleDeck()
+        setFirstRoundHand()
         setGameMode("Battle")
     }
 
