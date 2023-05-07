@@ -24,7 +24,7 @@ export const PlayField: React.FC = () => {
             </div>
             <div id="invocation-zone" className="grid grid-cols-4 gap-10">
                 {playedCards.map((card) => {
-                    return card ? <Card key={card.id} id={card.id} /> : null
+                    return card ? <Card key={card.id} id={card.id} atkmode={true} /> : null
                 })}
             </div>
         </div>
