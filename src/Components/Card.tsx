@@ -3,9 +3,10 @@ import usePlayerStore, { getCard } from "../store/store";
 
 interface props {
     id?: string;
+    atkmode: boolean
 }
 
-export const Card: React.FC<props> = ({ id }) => {
+export const Card: React.FC<props> = ({ id, atkmode }) => {
     const [playedCards, addCardToPlay, removeCardFromHand, gamePhase] = usePlayerStore(
         (state) => [
             state.battleInfo.playedCards,
@@ -27,24 +28,27 @@ export const Card: React.FC<props> = ({ id }) => {
         setIsCommandOpen(false);
     };
 
+    const Organize = (
+        <div className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex justify-center items-center z-10">
+            <div className="p-2 rounded-md grid grid-cols-4 grid-rows-2 gap-2">
+                {playedCards.map((card, pos) => {
+                    return card ? null : (
+                        <div
+                            className="bg-red-500 p-4 border-2 border-amber-300 rounded-md text-white font-semibold"
+                            onClick={(e) => handleCommandClose(e, pos)}
+                        >
+                            {pos}
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    )
+
     return (
-        <button className="w-28 cursor-pointer" onClick={() => setIsCommandOpen(true)} disabled={gamePhase !== "Attack"}>
-            {isCommandOpen && (
-                <div className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex justify-center items-center z-10">
-                    <div className="p-2 rounded-md grid grid-cols-4 grid-rows-2 gap-2">
-                        {playedCards.map((card, pos) => {
-                            return card ? null : (
-                                <div
-                                    className="bg-red-500 p-4 border-2 border-amber-300 rounded-md text-white font-semibold"
-                                    onClick={(e) => handleCommandClose(e, pos)}
-                                >
-                                    {pos}
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-            )}
+        <button className="w-28 cursor-pointer" onClick={() => setIsCommandOpen(true)} disabled={gamePhase !== "Attack" || atkmode}>
+            {isCommandOpen && Organize
+            }
             <div
                 id="info"
                 className="flex justify-center bg-yellow-500 relative text-white rounded-t-md"
@@ -59,6 +63,7 @@ export const Card: React.FC<props> = ({ id }) => {
                 <div className="bg-red-700 rounded-br px-3 py-1 flex items-center justify-center">
                     {card.atk > 0 ? card.atk : "S"}
                 </div>
+                {atkmode && <button>Attack</button>}
                 <div className="bg-blue-700 rounded-bl px-3 py-1 flex items-center justify-center">
                     {card.def > 0 ? card.def : "S"}
                 </div>
