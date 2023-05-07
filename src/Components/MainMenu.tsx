@@ -11,8 +11,8 @@ export const MainMenu: React.FC = () => {
                 <motion.div animate={{ y: 50 }} transition={{ delay: 1, ease: "easeInOut" }} className="text-8xl text-pink-500">
                     <GiCrown />
                 </motion.div>
-                <motion.div className="absolute top-10 left-6" animate={{ x: 100, y: 100, rotate: -25 }} transition={{ duration: 1 }}><StaticCard id="1" /></motion.div>
-                <motion.div className="absolute bottom-0 right-10" animate={{ x: -80, y: -50, rotate: -25 }} transition={{ duration: 1 }}><StaticCard id="13" /></motion.div>
+                <motion.div className="absolute top-10 left-6" animate={{ x: 100, y: 100, rotate: -25 }} transition={{ duration: 1 }}><StaticCard id="7" /></motion.div>
+                <motion.div className="absolute bottom-0 right-10" animate={{ x: -80, y: -50, rotate: -25 }} transition={{ duration: 1 }}><StaticCard id="32" /></motion.div>
                 <motion.div className="absolute top-10 right-6" animate={{ x: -60, y: 80, rotate: 30 }} transition={{ duration: 1 }}><StaticCard id="14" /></motion.div>
                 <motion.div className="absolute bottom-0 left-10" animate={{ x: 100, y: -80, rotate: 25 }} transition={{ duration: 1 }}><StaticCard id="15" /></motion.div>
                 <div>
