@@ -75,9 +75,6 @@ export const PlayerStats: React.FC = () => {
                 </div>
 
                 <div>
-                    <h4 className="text-xl text-white font-semibold text-center">
-                        Your Deck
-                    </h4>
                     <DeckDisplay />
                 </div>
             </div>
