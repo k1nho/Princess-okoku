@@ -13,10 +13,11 @@ interface PlayerStore {
     level: number;
     cardsCollected: number;
     gameMode: string;
+    turn: number;
     battleInfo: BattleInfo;
     enemyBattleInfo: BattleInfo;
-    gamePhase: string,
-    eGamePhase: string,
+    gamePhase: string;
+    eGamePhase: string;
     battleWinCond: boolean;
     setTutorial: () => void;
     setGameMode: (mode: string) => void;
@@ -26,6 +27,7 @@ interface PlayerStore {
     setLevel: () => void;
     setDeck: (l: number, r: number) => void;
     setBattleDeck: () => void;
+    setEBattleDeck: () => void;
     setFirstRoundHand: () => void;
     setGamePhase: (phase: string) => void;
     setEGamePhase: (phase: string) => void;
@@ -36,6 +38,9 @@ interface PlayerStore {
     removeCardFromHand: (id: string) => void;
     addCardToPlay: (pos: number, card: Card) => void;
     removeCardFromPlay: () => void;
+    attackCard: (card: Card, eCard: Card) => void;
+    attackElp: (atk: number) => void;
+    attacklp: (atk: number) => void;
     setWinCond: () => void;
     finishBattle: () => void;
 }
@@ -95,6 +100,7 @@ const startGame = {
     owned: [],
     deck: cachedDeck[0] ? getDeck(cachedDeck[1], cachedDeck[2]) : [],
     info: initialInfo,
+    turn: 0,
     battleInfo: initialBattleInfo,
     enemyBattleInfo: initialBattleInfo,
     gamePhase: "Draw",
@@ -156,17 +162,34 @@ const removeCardFromPlay = (cardsInPlay: (Card | null)[], idx: string) => {
     });
 };
 
+const takeDamage = (
+    playedCards: (Card | null)[],
+    card: Card,
+    dmg: number
+) => {
+    const pCards = [...playedCards]
+    for (let i = 0; i < pCards.length; i++) {
+        const match = pCards[i]
+        if (match !== null && match.id === card.id) {
+            match.def -= dmg
+            if (match.def <= 0) pCards[i] = null
+        }
+    }
+    return pCards;
+};
+
 const checkWinCond = (
     lp: number,
     elp: number,
     decksize: number,
     edecksize: number
 ): boolean => {
+    console.log(lp, elp, decksize, edecksize)
     if (lp <= 0 || elp <= 0 || decksize === 0 || edecksize === 0) return true;
     return false;
 };
 
-const usePlayerStore = create<PlayerStore>()((set, get) => ({
+const usePlayerStore = create<PlayerStore>()((set) => ({
     ...startGame,
     setGameMode: (mode: string) => set(() => ({ gameMode: mode })),
     setName: (name: string) =>
@@ -180,7 +203,7 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
     setLevel: () =>
         set((state) => ({
             info: { ...state.info },
-            level: state.level < 100 ? state.level + 1 : state.level,
+            level: state.level < 3 ? state.level + 1 : state.level,
         })),
     addCardToDeck: (id: string) =>
         set((state) => ({ deck: [...state.deck, getCard(id)] })),
@@ -196,6 +219,7 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
         set((state) => ({
             battleInfo: { ...state.battleInfo, deck: shuffleDeck(state.deck) },
         })),
+    setEBattleDeck: () => set((state) => ({ enemyBattleInfo: { ...state.enemyBattleInfo, deck: shuffleDeck(getDeck(12 * state.level, (12 * state.level) + 12)) } })),
     setFirstRoundHand: () =>
         set((state) => ({
             battleInfo: {
@@ -203,9 +227,14 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
                 handCards: setFirstRoundHand(state.battleInfo.deck),
                 drawPos: state.battleInfo.drawPos - 4,
             },
+            enemyBattleInfo: {
+                ...state.enemyBattleInfo,
+                handCards: setFirstRoundHand(state.enemyBattleInfo.deck),
+                drawPos: state.enemyBattleInfo.drawPos - 4,
+            }
         })),
-    setGamePhase: (phase: string) => set((state) => ({ gamePhase: phase })),
-    setEGamePhase: (phase: string) => set((state) => ({ gamePhase: phase })),
+    setGamePhase: (phase: string) => set(() => ({ gamePhase: phase })),
+    setEGamePhase: (phase: string) => set(() => ({ eGamePhase: phase })),
     prepareDraw: () =>
         set((state) => ({
             battleInfo: {
@@ -245,19 +274,36 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
                 playedCards: removeCardFromPlay(state.battleInfo.playedCards, "1"),
             },
         })),
+
+    attackCard: (card: Card, eCard: Card) =>
+        set((state) => ({
+            battleInfo: {
+                ...state.battleInfo,
+                playedCards: takeDamage(state.battleInfo.playedCards, card, eCard.atk),
+            },
+            enemyBattleInfo: {
+                ...state.enemyBattleInfo,
+                playedCards: takeDamage(
+                    state.enemyBattleInfo.playedCards,
+                    eCard,
+                    card.atk
+                ),
+            },
+        })),
+    attackElp: (atk: number) => set((state) => ({ enemyBattleInfo: { ...state.enemyBattleInfo, lp: state.enemyBattleInfo.lp - atk } })),
+    attacklp: (atk: number) => set((state) => ({ battleInfo: { ...state.battleInfo, lp: state.battleInfo.lp - atk } })),
     setWinCond: () =>
         set((state) => ({
             battleWinCond: checkWinCond(
                 state.battleInfo.lp,
                 state.enemyBattleInfo.lp,
-                state.battleInfo.deck.length,
-                state.enemyBattleInfo.deck.length
-            ),
+                state.battleInfo.drawPos,
+                state.enemyBattleInfo.drawPos),
         })),
     finishBattle: () =>
-        set((state) => ({
+        set(() => ({
             battleInfo: {
-                deck: state.deck,
+                deck: [],
                 handCards: [null, null, null, null, null],
                 drawPos: 12,
                 playedCards: [null, null, null, null, null, null, null, null],
@@ -265,13 +311,16 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
                 energy: 1,
             },
             enemyBattleInfo: {
-                deck: state.enemyBattleInfo.deck,
+                deck: [],
                 handCards: [null, null, null, null, null],
                 drawPos: 12,
                 playedCards: [null, null, null, null, null, null, null, null],
                 lp: 10,
                 energy: 1,
             },
+            turn: 1,
+            gamePhase: "Draw",
+            eGamePhase: "End"
         })),
 }));
 
