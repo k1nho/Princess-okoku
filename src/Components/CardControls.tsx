@@ -54,11 +54,13 @@ const Modal: React.FC<Iprops> = ({ setFullHand }) => {
 };
 
 export const CardControls: React.FC = () => {
-    const [handCards, gamePhase, setGamePhase, prepareDraw, addCardToHand, setGameMode, finishBattle] =
+    const [handCards, gamePhase, setGamePhase, setEGamePhase, setWinCond, prepareDraw, addCardToHand, setGameMode, finishBattle] =
         usePlayerStore((state) => [
             state.battleInfo.handCards,
             state.gamePhase,
             state.setGamePhase,
+            state.setEGamePhase,
+            state.setWinCond,
             state.prepareDraw,
             state.addCardToHand,
             state.setGameMode,
@@ -72,15 +74,20 @@ export const CardControls: React.FC = () => {
         return acc;
     }, 0);
 
-    const handleDrawCard = () => {
+    const handleDrawPhase = () => {
         prepareDraw();
         addCardToHand();
         setGamePhase("Attack")
     };
 
+    const handleEndPhase = () => {
+        setGamePhase("End")
+        setEGamePhase("Draw")
+        setWinCond()
+    }
+
     const handleQuitBattle = () => {
         finishBattle();
-        setGamePhase("Draw")
         setGameMode("Dashboard");
     };
 
@@ -90,7 +97,7 @@ export const CardControls: React.FC = () => {
         <div className="flex gap-8">
             <div className="flex items-center space-x-2">
                 {handCards.map((card) => {
-                    return card ? <Card key={card.id} id={card.id} /> : null;
+                    return card ? <Card key={card.id} id={card.id} atkmode={false} /> : null;
                 })}
             </div>
             {fullHand ? <Modal setFullHand={setFullHand} /> : <></>}
@@ -98,7 +105,7 @@ export const CardControls: React.FC = () => {
                 <button
                     className=" flex justify-center items-center space-x-2 bg-stone-900 rounded-full px-4 py-2 hover:bg-stone-700 transition ease-in-out duration-700 text-white"
                     onClick={() =>
-                        validCards === 5 ? setFullHand(true) : handleDrawCard()
+                        validCards === 5 ? setFullHand(true) : handleDrawPhase()
                     }
                     disabled={gamePhase !== "Draw"}
                 >
@@ -107,7 +114,7 @@ export const CardControls: React.FC = () => {
                 </button>
                 <button
                     className=" flex justify-center items-center space-x-2 bg-sky-800 rounded-full px-4 py-2 hover:bg-sky-900 transition ease-in-out duration-700 text-white text-md"
-                    onClick={() => setGamePhase("End")} disabled={gamePhase !== "Attack"}
+                    onClick={() => handleEndPhase()} disabled={gamePhase !== "Attack"}
                 >
                     <GiSpinningSword />
                     <p>End Attack</p>
