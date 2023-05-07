@@ -1,16 +1,10 @@
 import usePlayerStore from "../store/store";
 import { Card } from "./Card";
-import { CardPlaceholder } from "./CardPlaceholder";
-import { GiBallHeart, GiCrownedHeart, GiRollingEnergy } from "react-icons/gi"
+import { GiCrownedHeart, GiRollingEnergy } from "react-icons/gi"
 
-interface props {
-    isEnemyField: boolean;
-}
 
-export const PlayField: React.FC<props> = ({ isEnemyField }) => {
+export const PlayField: React.FC = () => {
     const [playedCards, lp, energy] = usePlayerStore((state) => [state.battleInfo.playedCards, state.battleInfo.lp, state.battleInfo.energy])
-    const invocation = isEnemyField ? "einvocation" : "invocation";
-    const spell = isEnemyField ? "espell" : "spell";
 
     return (
         <div className="flex flex-col justify-center items-center space-y-5 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 p-7 rounded-lg">
