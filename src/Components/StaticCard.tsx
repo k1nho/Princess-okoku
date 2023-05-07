@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { getCard } from "../store/store"
 
 interface props {
@@ -9,7 +10,7 @@ export const StaticCard: React.FC<props> = ({ id }) => {
 
     return (
 
-        <div className="w-28">
+        <motion.div className="w-28" whileHover={{ scale: 1.1 }}>
             <div id="info" className="flex justify-center bg-yellow-500 relative text-white rounded-t-md">
                 <div className="absolute -top-4 -left-6 rounded-full  px-3 py-1 border-2 border-stone-900 bg-blue-800 text-amber-100 font-semibold">{card.cost}</div>
                 <div className="font-semibold text-center">{card.name}</div>
@@ -26,7 +27,7 @@ export const StaticCard: React.FC<props> = ({ id }) => {
             <div className="flex flex-wrap bg-stone-900 rounded-b-md">
                 {card.description ? <p className="w-full text-xs text-white p-2"><span className="text-red-500 font-bold">Effect: </span>{card.description}</p> : <p className="w-full text-xs text-white p-2">Normal card</p>}
             </div>
-        </div >
+        </motion.div >
 
     )
 }
