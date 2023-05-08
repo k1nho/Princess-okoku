@@ -54,7 +54,7 @@ const Modal: React.FC<Iprops> = ({ setFullHand }) => {
 };
 
 export const CardControls: React.FC = () => {
-    const [handCards, gamePhase, setGamePhase, setWinCond, prepareDraw, addCardToHand, setGameMode, finishBattle, resetEnergy] =
+    const [handCards, gamePhase, setGamePhase, setWinCond, prepareDraw, addCardToHand, setGameMode, finishBattle] =
         usePlayerStore((state) => [
             state.battleInfo.handCards,
             state.gamePhase,
@@ -64,7 +64,6 @@ export const CardControls: React.FC = () => {
             state.addCardToHand,
             state.setGameMode,
             state.finishBattle,
-            state.resetEnergy,
         ]);
 
     const [fullHand, setFullHand] = useState(false);
@@ -81,7 +80,6 @@ export const CardControls: React.FC = () => {
     };
 
     const handleEndPhase = () => {
-        resetEnergy()
         setGamePhase("EDraw")
         setWinCond()
     }
