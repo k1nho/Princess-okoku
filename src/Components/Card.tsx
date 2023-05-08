@@ -8,7 +8,7 @@ interface props {
 }
 
 export const Card: React.FC<props> = ({ id, atkmode }) => {
-    const [playedCards, ePlayedCards, addCardToPlay, removeCardFromHand, attackCard, attackElp] = usePlayerStore(
+    const [playedCards, ePlayedCards, addCardToPlay, removeCardFromHand, attackCard, attackElp, gamephase, energy, setEnergy] = usePlayerStore(
         (state) => [
             state.battleInfo.playedCards,
             state.enemyBattleInfo.playedCards,
@@ -16,6 +16,9 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
             state.removeCardFromHand,
             state.attackCard,
             state.attackElp,
+            state.gamePhase,
+            state.battleInfo.energy,
+            state.setEnergy
         ]
     );
 
@@ -31,6 +34,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
         e.stopPropagation();
         removeCardFromHand(card.id);
         addCardToPlay(pos, card);
+        setEnergy(card.cost)
         setIsCommandOpen(false);
     };
 
@@ -44,7 +48,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
     }
 
     const Organize = (
-        <div className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex justify-center items-center z-10">
+        <div className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex justify-center items-center z-10 curor-pointer">
             <div className="p-2 rounded-md grid grid-cols-4 grid-rows-2 gap-2">
                 {playedCards.map((card, pos) => {
                     return card ? null : (
@@ -79,7 +83,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
         </div>)
 
     return (
-        <div className="w-28 cursor-pointer">
+        <div className="w-28">
             {isCommandOpen && Organize}
             {isAttackOpen && AttackMode}
             <div
@@ -96,9 +100,9 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
                 <div className="bg-red-700 rounded-br px-3 py-1 flex items-center justify-center">
                     {card.atk > 0 ? card.atk : "S"}
                 </div>
-                {atkmode ? <button className="bg-red-500 text-white rounded-full p-2" onClick={() => setIsAttack(true)} disabled={hasAttacked}>
+                {atkmode ? <button className="bg-red-500 text-white rounded-full p-2" onClick={() => setIsAttack(true)} disabled={hasAttacked || gamephase !== "Attack"}>
                     <GiSwordWound />
-                </button> : <button className="bg-amber-500 text-white rounded-full p-2" onClick={() => setIsCommandOpen(true)}>
+                </button> : <button className="bg-amber-500 text-white rounded-full p-2" onClick={() => setIsCommandOpen(true)} disabled={gamephase !== "Attack" || (energy - card.cost) < 0}>
                     <GiRollingEnergy />
                 </button>}
                 <div className="bg-blue-700 rounded-bl px-3 py-1 flex items-center justify-center">
