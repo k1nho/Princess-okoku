@@ -19,11 +19,13 @@ interface PlayerStore {
     gamePhase: string;
     battleWinCond: boolean;
     setTutorial: () => void;
+    setOwned: (deckId: number) => void;
     setGameMode: (mode: string) => void;
     setName: (name: string) => void;
     setWins: () => void;
     setLosses: () => void;
     setLevel: () => void;
+    setTurn: () => void;
     setDeck: (l: number, r: number) => void;
     setBattleDeck: () => void;
     setEBattleDeck: () => void;
@@ -77,6 +79,10 @@ const getDeck = (l: number, r: number): Card[] => {
     return cardpool.slice(l, r);
 };
 
+const getCollectedDecks = (ownedDecks: number[], deckId: number) => {
+    return [...ownedDecks, deckId]
+}
+
 
 const returnBounds = (): [boolean, number, number] => {
     let l = -1;
@@ -91,10 +97,14 @@ const returnBounds = (): [boolean, number, number] => {
 };
 
 const cachedDeck = returnBounds();
+const storageLevel = localStorage.getItem("po_level")
+const cacheLevel = (storageLevel !== null) ? parseInt(storageLevel, 10) : 0
+const storageOwned = localStorage.getItem("po_odecks")
+const cacheOwned = storageOwned !== null ? JSON.parse(storageOwned) : []
 
 const startGame = {
     tutorial: localStorage.getItem("isTutorial") ? false : true,
-    owned: [],
+    owned: cacheOwned,
     deck: cachedDeck[0] ? getDeck(cachedDeck[1], cachedDeck[2]) : [],
     info: initialInfo,
     turn: 1,
@@ -104,7 +114,7 @@ const startGame = {
     eGamePhase: "End",
     battleWinCond: false,
     gameMode: "MainMenu",
-    level: 0,
+    level: cacheLevel,
     cardsCollected: 0,
 };
 
@@ -187,10 +197,11 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
         })),
     setLevel: () =>
         set((state) => ({
-            info: { ...state.info },
             level: state.level < 3 ? state.level + 1 : state.level,
         })),
     setTutorial: () => set(() => ({ tutorial: false })),
+    setOwned: (deckId: number) => set((state) => ({ owned: getCollectedDecks(state.owned, deckId) })),
+    setTurn: () => set((state) => ({ turn: state.turn + 1 })),
     setDeck: (l: number, r: number) =>
         set((state) => ({
             deck: getDeck(l, r),
@@ -318,7 +329,7 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
             battleInfo: { ...state.battleInfo, lp: state.battleInfo.lp - atk },
         })),
     setEnergy: (cost: number) => set((state) => ({ battleInfo: { ...state.battleInfo, energy: state.battleInfo.energy - cost } })),
-    resetEnergy: () => set((state) => ({ battleInfo: { ...state.battleInfo, energy: state.turn + 1 } })),
+    resetEnergy: () => set((state) => ({ battleInfo: { ...state.battleInfo, energy: state.turn + 1 }, enemyBattleInfo: { ...state.enemyBattleInfo, energy: state.turn + 1 } })),
     setWinCond: () =>
         set((state) => ({
             battleWinCond: checkWinCond(
