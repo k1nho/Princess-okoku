@@ -17,7 +17,6 @@ interface PlayerStore {
     battleInfo: BattleInfo;
     enemyBattleInfo: BattleInfo;
     gamePhase: string;
-    eGamePhase: string;
     battleWinCond: boolean;
     setTutorial: () => void;
     setGameMode: (mode: string) => void;
@@ -30,17 +29,19 @@ interface PlayerStore {
     setEBattleDeck: () => void;
     setFirstRoundHand: () => void;
     setGamePhase: (phase: string) => void;
-    setEGamePhase: (phase: string) => void;
-    addCardToDeck: (id: string) => void;
-    removeCardfromDeck: (id: string) => void;
     prepareDraw: () => void;
     addCardToHand: () => void;
     removeCardFromHand: (id: string) => void;
     addCardToPlay: (pos: number, card: Card) => void;
-    removeCardFromPlay: () => void;
+    prepareEDraw: () => void;
+    addCardToEHand: () => void;
+    removeECardFromHand: (id: string) => void;
+    addCardToEPlay: (pos: number, card: Card) => void;
     attackCard: (card: Card, eCard: Card) => void;
     attackElp: (atk: number) => void;
     attacklp: (atk: number) => void;
+    setEnergy: (cost: number) => void;
+    resetEnergy: () => void;
     setWinCond: () => void;
     finishBattle: () => void;
 }
@@ -76,10 +77,6 @@ const getDeck = (l: number, r: number): Card[] => {
     return cardpool.slice(l, r);
 };
 
-const removeCard = (id: string, deck: Card[]): Card[] => {
-    const cards = deck;
-    return cards.filter((card) => card.id !== id);
-};
 
 const returnBounds = (): [boolean, number, number] => {
     let l = -1;
@@ -100,7 +97,7 @@ const startGame = {
     owned: [],
     deck: cachedDeck[0] ? getDeck(cachedDeck[1], cachedDeck[2]) : [],
     info: initialInfo,
-    turn: 0,
+    turn: 1,
     battleInfo: initialBattleInfo,
     enemyBattleInfo: initialBattleInfo,
     gamePhase: "Draw",
@@ -155,24 +152,13 @@ const addCardToPlay = (
     return field;
 };
 
-const removeCardFromPlay = (cardsInPlay: (Card | null)[], idx: string) => {
-    return cardsInPlay.filter((card) => {
-        if (card === null) return true;
-        return card.id !== idx;
-    });
-};
-
-const takeDamage = (
-    playedCards: (Card | null)[],
-    card: Card,
-    dmg: number
-) => {
-    const pCards = [...playedCards]
+const takeDamage = (playedCards: (Card | null)[], card: Card, dmg: number) => {
+    const pCards = [...playedCards];
     for (let i = 0; i < pCards.length; i++) {
-        const match = pCards[i]
+        const match = pCards[i];
         if (match !== null && match.id === card.id) {
-            match.def -= dmg
-            if (match.def <= 0) pCards[i] = null
+            match.def -= dmg;
+            if (match.def <= 0) pCards[i] = null;
         }
     }
     return pCards;
@@ -184,7 +170,6 @@ const checkWinCond = (
     decksize: number,
     edecksize: number
 ): boolean => {
-    console.log(lp, elp, decksize, edecksize)
     if (lp <= 0 || elp <= 0 || decksize === 0 || edecksize === 0) return true;
     return false;
 };
@@ -205,10 +190,6 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
             info: { ...state.info },
             level: state.level < 3 ? state.level + 1 : state.level,
         })),
-    addCardToDeck: (id: string) =>
-        set((state) => ({ deck: [...state.deck, getCard(id)] })),
-    removeCardfromDeck: (id: string) =>
-        set((state) => ({ deck: removeCard(id, state.deck) })),
     setTutorial: () => set(() => ({ tutorial: false })),
     setDeck: (l: number, r: number) =>
         set((state) => ({
@@ -219,7 +200,13 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
         set((state) => ({
             battleInfo: { ...state.battleInfo, deck: shuffleDeck(state.deck) },
         })),
-    setEBattleDeck: () => set((state) => ({ enemyBattleInfo: { ...state.enemyBattleInfo, deck: shuffleDeck(getDeck(12 * state.level, (12 * state.level) + 12)) } })),
+    setEBattleDeck: () =>
+        set((state) => ({
+            enemyBattleInfo: {
+                ...state.enemyBattleInfo,
+                deck: shuffleDeck(getDeck(12 * state.level, 12 * state.level + 12)),
+            },
+        })),
     setFirstRoundHand: () =>
         set((state) => ({
             battleInfo: {
@@ -231,10 +218,9 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
                 ...state.enemyBattleInfo,
                 handCards: setFirstRoundHand(state.enemyBattleInfo.deck),
                 drawPos: state.enemyBattleInfo.drawPos - 4,
-            }
+            },
         })),
     setGamePhase: (phase: string) => set(() => ({ gamePhase: phase })),
-    setEGamePhase: (phase: string) => set(() => ({ eGamePhase: phase })),
     prepareDraw: () =>
         set((state) => ({
             battleInfo: {
@@ -253,6 +239,43 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
                 ),
             },
         })),
+    prepareEDraw: () =>
+        set((state) => ({
+            enemyBattleInfo: {
+                ...state.enemyBattleInfo,
+                drawPos: state.enemyBattleInfo.drawPos - 1,
+            },
+        })),
+    addCardToEHand: () =>
+        set((state) => ({
+            enemyBattleInfo: {
+                ...state.enemyBattleInfo,
+                handCards: draw(
+                    state.enemyBattleInfo.deck,
+                    state.enemyBattleInfo.handCards,
+                    state.enemyBattleInfo.drawPos
+                ),
+            },
+        })),
+    removeECardFromHand: (id: string) =>
+        set((state) => ({
+            enemyBattleInfo: {
+                ...state.enemyBattleInfo,
+                handCards: removeCardFromHand(state.enemyBattleInfo.handCards, id),
+            },
+        })),
+    addCardToEPlay: (pos: number, card: Card) =>
+        set((state) => ({
+            enemyBattleInfo: {
+                ...state.enemyBattleInfo,
+                playedCards: addCardToPlay(
+                    state.enemyBattleInfo.playedCards,
+                    card,
+                    pos
+                ),
+            },
+        })),
+
     removeCardFromHand: (id: string) =>
         set((state) => ({
             battleInfo: {
@@ -265,13 +288,6 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
             battleInfo: {
                 ...state.battleInfo,
                 playedCards: addCardToPlay(state.battleInfo.playedCards, card, pos),
-            },
-        })),
-    removeCardFromPlay: () =>
-        set((state) => ({
-            battleInfo: {
-                ...state.battleInfo,
-                playedCards: removeCardFromPlay(state.battleInfo.playedCards, "1"),
             },
         })),
 
@@ -290,15 +306,27 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
                 ),
             },
         })),
-    attackElp: (atk: number) => set((state) => ({ enemyBattleInfo: { ...state.enemyBattleInfo, lp: state.enemyBattleInfo.lp - atk } })),
-    attacklp: (atk: number) => set((state) => ({ battleInfo: { ...state.battleInfo, lp: state.battleInfo.lp - atk } })),
+    attackElp: (atk: number) =>
+        set((state) => ({
+            enemyBattleInfo: {
+                ...state.enemyBattleInfo,
+                lp: state.enemyBattleInfo.lp - atk,
+            },
+        })),
+    attacklp: (atk: number) =>
+        set((state) => ({
+            battleInfo: { ...state.battleInfo, lp: state.battleInfo.lp - atk },
+        })),
+    setEnergy: (cost: number) => set((state) => ({ battleInfo: { ...state.battleInfo, energy: state.battleInfo.energy - cost } })),
+    resetEnergy: () => set((state) => ({ battleInfo: { ...state.battleInfo, energy: state.turn + 1 } })),
     setWinCond: () =>
         set((state) => ({
             battleWinCond: checkWinCond(
                 state.battleInfo.lp,
                 state.enemyBattleInfo.lp,
                 state.battleInfo.drawPos,
-                state.enemyBattleInfo.drawPos),
+                state.enemyBattleInfo.drawPos
+            ),
         })),
     finishBattle: () =>
         set(() => ({
@@ -320,7 +348,6 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
             },
             turn: 1,
             gamePhase: "Draw",
-            eGamePhase: "End"
         })),
 }));
 
