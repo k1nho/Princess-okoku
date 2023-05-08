@@ -4,6 +4,7 @@ import cosmos from "../assets/bgs/stage_cosmos.png"
 import { EplayField } from "./EPlayField"
 import usePlayerStore from "../store/store"
 import { GiCrown } from "react-icons/gi"
+import { ComputerControls } from "./ComputerControls"
 
 export const Board: React.FC = () => {
 
@@ -35,6 +36,9 @@ export const Board: React.FC = () => {
         <div className="flex-col relative h-screen bg-cover bg-center" style={{ backgroundImage: `url(${cosmos})` }}>
             <div className="absolute top-0 left-4 p-4">
                 <EplayField />
+            </div>
+            <div className="absolute right-10 top-10 p-4">
+                <ComputerControls />
             </div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <div className=" text-4xl text-bold p-4 text-white rounded-xl bg-gradient-to-r from-purple-400 to-pink-600 ">
