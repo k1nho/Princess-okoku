@@ -1,20 +1,31 @@
 import { CardControls } from "./CardControls"
 import { PlayField } from "./PlayField"
-import cosmos from "../assets/bgs/stage_cosmos.png"
 import { EplayField } from "./EPlayField"
 import usePlayerStore from "../store/store"
 import { GiCrown } from "react-icons/gi"
 import { ComputerControls } from "./ComputerControls"
 
+const storybgs = [
+    { bg: "src/assets/bgs/stage_dragon_den.png", name: "Dragon's Den" },
+    { bg: "src/assets/bgs/stage_machina_world.png", name: "Machina Kingdom" },
+    { bg: "src/assets/bgs/stage_road_to_starry.png", name: "Road To Starry" },
+    { bg: "src/assets/bgs/stage_cosmos.png", name: "Uverworld" },
+];
+
+
 export const Board: React.FC = () => {
 
-    const [winCond, setWinCond, turn, setGameMode, finishBattle] = usePlayerStore((state) => [state.battleWinCond, state.setWinCond, state.turn, state.setGameMode, state.finishBattle])
+    const [winCond, setWinCond, turn, setGameMode, finishBattle, level, setLevel] = usePlayerStore((state) => [state.battleWinCond, state.setWinCond, state.turn, state.setGameMode, state.finishBattle, state.level, state.setLevel])
 
     const handleVictory = () => {
         finishBattle()
         setGameMode("Dashboard")
         setWinCond()
+        setLevel()
+        localStorage.setItem("po_level", level.toString())
     }
+
+    const storybg = (level < 3 && level >= 0) ? storybgs[level] : storybgs[0];
 
     if (winCond) {
         return (
@@ -33,7 +44,7 @@ export const Board: React.FC = () => {
     }
 
     return (
-        <div className="flex-col relative h-screen bg-cover bg-center" style={{ backgroundImage: `url(${cosmos})` }}>
+        <div className="flex-col relative h-screen bg-cover bg-center" style={{ backgroundImage: `url(${storybg.bg})` }}>
             <div className="absolute top-0 left-4 p-4">
                 <EplayField />
             </div>
