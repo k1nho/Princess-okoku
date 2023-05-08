@@ -6,10 +6,10 @@ export const ChooseDeck: React.FC = () => {
     const [setDeck] = usePlayerStore((state) => [state.setDeck]);
 
     const handleSetDeck = (l: number, r: number) => {
-        localStorage.setItem("playerdeckl", l.toString())
-        localStorage.setItem("playerdeckr", r.toString())
-        setDeck(l, r)
-    }
+        localStorage.setItem("playerdeckl", l.toString());
+        localStorage.setItem("playerdeckr", r.toString());
+        setDeck(l, r);
+    };
 
     return (
         <div className="flex flex-col">
@@ -50,7 +50,8 @@ export const ChooseDeck: React.FC = () => {
                     <div className="flex flex-wrap font-semibold text-lg text-gray-100 text-center">
                         <p>
                             The Techno Princess deck is a tactical deck with emphasis on its
-                            key ruler the AI Princess, hack your way through Althreisha with this wonderful cyberpunk deck
+                            key ruler the AI Princess, hack your way through Althreisha with
+                            this wonderful cyberpunk deck
                         </p>
                     </div>
                 </div>
@@ -90,36 +91,6 @@ export const ChooseDeck: React.FC = () => {
                         </p>
                     </div>
                 </div>
-                <div
-                    id="dolls"
-                    className="w-1/2 bg-gradient-to-r from-sky-400 to-blue-500 rounded-lg p-4"
-                >
-                    <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
-                        <h1>Sweet Dolls</h1>
-                    </div>
-                    <div className="flex justify-center space-x-10">
-                        <motion.div
-                            transition={{ duration: 0.5 }}
-                            whileHover={{ scale: 1.1 }}
-                        ></motion.div>
-
-                        <motion.div
-                            transition={{ duration: 0.5 }}
-                            whileHover={{ scale: 1.1 }}
-                        ></motion.div>
-                        <motion.div
-                            transition={{ duration: 0.5 }}
-                            whileHover={{ scale: 1.1 }}
-                        ></motion.div>
-                    </div>
-                    <div className="flex flex-wrap font-semibold text-lg text-gray-100 text-center">
-                        <p>
-                            The Sweet Dolls deck is a fast play deck with emphasis on the
-                            reduce cost mechanic, command these sugary dolls through the lands
-                            of Althreisha
-                        </p>
-                    </div>
-                </div>
 
                 <div
                     id="spirit-fairies"
@@ -155,6 +126,36 @@ export const ChooseDeck: React.FC = () => {
                             The Spirit Fairies deck is a control deck with emphasis on the
                             instant attack boost mechanic,use the fairies as your guiding
                             light through Althreisha
+                        </p>
+                    </div>
+                </div>
+                <div
+                    id="dolls"
+                    className="w-1/2 bg-gradient-to-r from-sky-400 to-blue-500 rounded-lg p-4"
+                >
+                    <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
+                        <h1>Sweet Dolls</h1>
+                    </div>
+                    <div className="flex justify-center space-x-10">
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        ></motion.div>
+
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        ></motion.div>
+                        <motion.div
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                        ></motion.div>
+                    </div>
+                    <div className="flex flex-wrap font-semibold text-lg text-gray-100 text-center">
+                        <p>
+                            The Sweet Dolls deck is a fast play deck with emphasis on the
+                            reduce cost mechanic, command these sugary dolls through the lands
+                            of Althreisha
                         </p>
                     </div>
                 </div>
