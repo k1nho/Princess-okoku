@@ -6,8 +6,8 @@ import { GiCrown } from "react-icons/gi"
 import { ComputerControls } from "./ComputerControls"
 
 const storybgs = [
-    { bg: "src/assets/bgs/stage_dragon_den.png", name: "Dragon's Den" },
     { bg: "src/assets/bgs/stage_machina_world.png", name: "Machina Kingdom" },
+    { bg: "src/assets/bgs/stage_dragon_den.png", name: "Dragon's Den" },
     { bg: "src/assets/bgs/stage_road_to_starry.png", name: "Road To Starry" },
     { bg: "src/assets/bgs/stage_cosmos.png", name: "Uverworld" },
 ];
@@ -15,17 +15,19 @@ const storybgs = [
 
 export const Board: React.FC = () => {
 
-    const [winCond, setWinCond, turn, setGameMode, finishBattle, level, setLevel] = usePlayerStore((state) => [state.battleWinCond, state.setWinCond, state.turn, state.setGameMode, state.finishBattle, state.level, state.setLevel])
+    const [winCond, setWinCond, turn, setGameMode, finishBattle, level, setLevel, owned, setToOwned] = usePlayerStore((state) => [state.battleWinCond, state.setWinCond, state.turn, state.setGameMode, state.finishBattle, state.level, state.setLevel, state.owned, state.setOwned])
 
     const handleVictory = () => {
         finishBattle()
         setGameMode("Dashboard")
         setWinCond()
         setLevel()
-        localStorage.setItem("po_level", level.toString())
+        localStorage.setItem("po_level", ((level + 1) % 4).toString())
+        if (!owned.includes(level)) setToOwned(level);
+        localStorage.setItem("po_odecks", JSON.stringify(owned))
     }
 
-    const storybg = (level < 3 && level >= 0) ? storybgs[level] : storybgs[0];
+    const storybg = (level <= 3 && level >= 0) ? storybgs[level] : storybgs[0];
 
     if (winCond) {
         return (
