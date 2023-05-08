@@ -21,16 +21,18 @@ const storybgs = [
 ];
 
 export const PlayerStats: React.FC = () => {
-    const [info, level, setGameMode, setBattleDeck, setFirstRoundHand] = usePlayerStore((state) => [
+    const [info, level, setGameMode, setBattleDeck, setEBattleDeck, setFirstRoundHand] = usePlayerStore((state) => [
         state.info,
         state.level,
         state.setGameMode,
         state.setBattleDeck,
+        state.setEBattleDeck,
         state.setFirstRoundHand,
     ]);
 
     const handleExplore = () => {
         setBattleDeck();
+        setEBattleDeck();
         setFirstRoundHand();
         setGameMode("Battle");
     };
