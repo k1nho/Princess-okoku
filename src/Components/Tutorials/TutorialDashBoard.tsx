@@ -6,10 +6,16 @@ import { ConfirmDeck } from "./ConfirmDeck";
 
 export const TutorialDashboard: React.FC = () => {
     const [step, setStep] = useState(1);
-    const [setTutorial, deck] = usePlayerStore((state) => [state.setTutorial, state.deck]);
+    const [setTutorial, deck, owned, setToOwned] = usePlayerStore((state) => [state.setTutorial, state.deck, state.owned, state.setOwned]);
     const cancelTutorial = () => {
         localStorage.setItem("isTutorial", "0");
         setTutorial();
+        const l = localStorage.getItem("playerdeckl")
+        if (l !== null) {
+            const deckId = Math.floor(parseInt(l, 10) / 12)
+            setToOwned(deckId)
+            localStorage.setItem("po_odecks", JSON.stringify(owned))
+        }
     };
 
     const handleNextStep = () => {
