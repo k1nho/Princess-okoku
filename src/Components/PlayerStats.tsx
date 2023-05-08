@@ -7,28 +7,34 @@ import {
     GiRoundStar,
     GiIdCard,
     GiLaurelCrown,
+    GiCancel,
 } from "react-icons/gi";
 import { IoIosStats } from "react-icons/io";
 import { DeckDisplay } from "./DeckDisplay";
 import { StaticCard } from "./StaticCard";
 import { motion } from "framer-motion"
+import { useState } from "react";
 
 const storybgs = [
-    { bg: "src/assets/bgs/bg_dragons_den.png", name: "Dragon's Den" },
-    { bg: "src/assets/bgs/bg_machina_world.png", name: "Machina Kingdom" },
-    { bg: "src/assets/bgs/bg_road_to_starry.png", name: "Road To Starry" },
-    { bg: "src/assets/bgs/bg_cosmos.png", name: "Uverworld" },
+    { bg: "src/assets/bgs/bg_machina_world.png", name: "Machina Kingdom", deckName: "Techno Princess" },
+    { bg: "src/assets/bgs/bg_dragons_den.png", name: "Dragon's Den", deckName: "Dragon Empire" },
+    { bg: "src/assets/bgs/bg_road_to_starry.png", name: "Road To Starry", deckName: "Spirit Fairies" },
+    { bg: "src/assets/bgs/bg_cosmos.png", name: "Uverworld", deckName: "Talking Cats" },
 ];
 
 export const PlayerStats: React.FC = () => {
-    const [info, level, setGameMode, setBattleDeck, setEBattleDeck, setFirstRoundHand] = usePlayerStore((state) => [
+    const [info, level, setGameMode, setPermaDeck, setBattleDeck, setEBattleDeck, setFirstRoundHand, ownedDecks] = usePlayerStore((state) => [
         state.info,
         state.level,
         state.setGameMode,
+        state.setDeck,
         state.setBattleDeck,
         state.setEBattleDeck,
         state.setFirstRoundHand,
+        state.owned
     ]);
+
+    const [OpenDeckChoice, setOpenDeckChoice] = useState(false)
 
     const handleExplore = () => {
         setBattleDeck();
@@ -37,10 +43,40 @@ export const PlayerStats: React.FC = () => {
         setGameMode("Battle");
     };
 
-    const storybg = (level < 3 && level >= 0) ? storybgs[level] : storybgs[0];
+    const changeDeck = (deckId: number) => {
+        setPermaDeck(deckId * 12, (deckId * 12) + 12)
+        setOpenDeckChoice(false)
+    }
+
+    const storybg = (level <= 3 && level >= 0) ? storybgs[level] : storybgs[0];
+
+
+    const DeckChoice = (
+        <div className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex flex-col justify-center items-center z-10">
+            <p className="text-lg font-bold text-white">Deck to take on adventure:</p>
+            <div className="p-2 rounded-md grid grid-cols-4 grid-rows-2 gap-2">
+                {ownedDecks.map((deckId) => (
+                    <button
+                        key={deckId}
+                        className="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200 focus:outline-none"
+                        onClick={() => changeDeck(deckId)}
+                    >
+                        {storybgs[deckId].deckName}
+                    </button>
+                ))}
+            </div>
+
+            <button className="px-4 py-2 rounded-md  text-white bg-red-500 hover:bg-red-400 focus:outline-none" onClick={() => setOpenDeckChoice(false)}><GiCancel /></button>
+        </div>
+
+    )
+
+
+
 
     return (
         <div className="min-h-screen flex justify-around items-center space-x-2">
+            {OpenDeckChoice && DeckChoice}
             <div className="flex flex-col justify-center items-center bg-stone-900 space-y-4 p-4 rounded-xl">
                 <div>
                     <h4 className="text-white text-xl font-semibold">Okoku Center</h4>
@@ -69,7 +105,7 @@ export const PlayerStats: React.FC = () => {
                     </button>
                     <button
                         className="flex items-center space-x-2 bg-stone-600 rounded-full px-4 py-2 hover:bg-stone-700 transition ease-in-out duration-700 text-white"
-                        onClick={() => setGameMode("Learn")}
+                        onClick={() => setOpenDeckChoice(true)}
                     >
                         <GiMagicGate />
                         <p>Change Deck</p>
