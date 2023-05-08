@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import usePlayerStore from "../store/store";
 import { CardPlaceholder } from "./CardPlaceholder";
 
 export const ComputerControls: React.FC = () => {
-    const [handCards, gamePhase, setGamePhase, setWinCond, prepareDraw, addCardToHand, removeCardFromHand, setGameMode, finishBattle, setTurn, resetEnergy] =
+    const [handCards, gamePhase, setGamePhase, setWinCond, prepareDraw, addCardToHand, removeCardFromHand, setTurn, resetEnergy] =
         usePlayerStore((state) => [
             state.enemyBattleInfo.handCards,
             state.gamePhase,
@@ -12,13 +12,9 @@ export const ComputerControls: React.FC = () => {
             state.prepareEDraw,
             state.addCardToEHand,
             state.removeECardFromHand,
-            state.setGameMode,
-            state.finishBattle,
             state.setTurn,
             state.resetEnergy
         ]);
-
-
 
     useEffect(() => {
         const validCards = handCards.reduce((acc, val) => {
