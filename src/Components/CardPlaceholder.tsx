@@ -1,3 +1,5 @@
+import { GiQueenCrown } from "react-icons/gi"
+
 export const CardPlaceholder: React.FC = () => {
     return (
         <div className="w-28">
@@ -7,7 +9,9 @@ export const CardPlaceholder: React.FC = () => {
             >
                 <div className="font-semibold"></div>
             </div>
-            <div className="w-28 h-28 rounded-sm bg-stone-900"></div>
+            <div className="w-28 h-28 rounded-sm bg-stone-900 flex items-center justify-center text-pink-500 text-4xl">
+                <GiQueenCrown />
+            </div>
             <div className="flex justify-between text-amber-100 font-semibold bg-stone-900">
             </div>
             <div className="flex flex-wrap bg-stone-900 rounded-b-md">
