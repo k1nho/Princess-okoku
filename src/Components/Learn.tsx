@@ -35,7 +35,7 @@ const content = [
         id: 5,
         title: "Effects",
         content:
-            "In Princess Okoku, a card can have any of the following special effects: 1) instant attack (n): A card with this effect boosts all of its allies attack on the field by (n) 2) instant hp (n): A card with this effect boost all of its allies defense on the field by (n) 3) instant damage (n): A card with this effect deals (n) damage to all of the cards in the opponent field and the oponent itself 4) Search (name): A card with this effect searches for (name) provided (name) is not in hand or onthe field 5) Reduce cost (n): A card with this effect reduces the cost of all the cards in hand by (n)",
+            "In Princess Okoku, a card can have any of the following special effects: 1) Atk +(n): A card with this effect boosts all of its allies attack on the field by (n) 2) HP +(n): A card with this effect boost all of its allies defense on the field by (n) 3) Dmg +(n): A card with this effect deals (n) damage to all of the cards in the opponent field and the oponent itself 4) Cost -(n): A card with this effect reduces the cost of all the cards in hand by (n)",
     },
 ];
 
