@@ -43,7 +43,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
     const fullFieldSize = playedCards.reduce((acc, val) => {
         if (val !== null) return acc + 1;
         return acc;
-    }, 0)
+    }, 0);
 
     const handleCommandClose = (
         e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -70,22 +70,32 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
 
     const Organize = (
         <div className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex justify-center items-center z-10 curor-pointer">
-            <div className="p-2 rounded-md grid grid-cols-4 grid-rows-2 gap-2">
-                {fullFieldSize === 8 ? <button onClick={() => setIsCommandOpen(false)}>Full Field</button> :
-                    (<div>
-                        {playedCards.map((card, pos) => {
-                            return card ? null : (
-                                <div
-                                    key={pos}
-                                    className="bg-red-500 p-4 border-2 border-amber-300 rounded-md text-white font-semibold"
-                                    onClick={(e) => handleCommandClose(e, pos)}
-                                >
-                                    {pos}
-                                </div>
-                            );
-                        })}
-
-                    </div>)}
+            <div className="">
+                {fullFieldSize === 8 ? (
+                    <button onClick={() => setIsCommandOpen(false)}>Full Field</button>
+                ) : (
+                    <div className="flex flex-col">
+                        <button
+                            className="bg-red-500 rounded-full text-white text-xl"
+                            onClick={() => setIsCommandOpen(false)}
+                        >
+                            X
+                        </button>
+                        <div className="p-2 rounded-md grid grid-cols-4 grid-rows-2 gap-2">
+                            {playedCards.map((card, pos) => {
+                                return card ? null : (
+                                    <div
+                                        key={pos}
+                                        className="bg-red-500 p-4 border-2 border-amber-300 rounded-md text-white font-semibold cursor-pointer"
+                                        onClick={(e) => handleCommandClose(e, pos)}
+                                    >
+                                        {pos}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -94,10 +104,20 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
         <div className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex justify-center items-center z-10">
             <div className="">
                 {emptyFieldSize === 8 ? (
-                    <div className="bg-sky-800 text-white text-2xl cursor-pointer rounded-xl p-4" onClick={(e) => handleAttackClose(e, 0)}>LP</div>
+                    <div
+                        className="bg-sky-800 text-white text-2xl cursor-pointer rounded-xl p-4"
+                        onClick={(e) => handleAttackClose(e, 0)}
+                    >
+                        LP
+                    </div>
                 ) : (
                     <div className="flex flex-col space-y-4">
-                        <button className="bg-red-500 rounded-full text-white text-xl" onClick={() => setIsAttack(false)}>X</button>
+                        <button
+                            className="bg-red-500 rounded-full text-white text-xl"
+                            onClick={() => setIsAttack(false)}
+                        >
+                            X
+                        </button>
                         <div className="p-2 rounded-md grid grid-cols-4 grid-rows-2 gap-2">
                             {ePlayedCards.map((eCard, pos) => {
                                 return eCard ? (
