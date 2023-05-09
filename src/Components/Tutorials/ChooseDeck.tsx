@@ -130,31 +130,40 @@ export const ChooseDeck: React.FC = () => {
                 </div>
                 <div
                     id="dolls"
-                    className="w-1/2 bg-gradient-to-r from-sky-400 to-blue-500 rounded-lg p-4"
+                    className="w-1/2 bg-gradient-to-r from-sky-400 to-blue-500 rounded-lg p-4 cursor-pointer"
                     onClick={() => handleSetDeck(3)}
                 >
                     <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
-                        <h1>Sweet Dolls</h1>
+                        <h1>Talking Cats</h1>
                     </div>
                     <div className="flex justify-center space-x-10">
                         <motion.div
                             transition={{ duration: 0.5 }}
                             whileHover={{ scale: 1.1 }}
-                        ></motion.div>
+                        >
+
+                            <StaticCard id="39" />
+                        </motion.div>
 
                         <motion.div
                             transition={{ duration: 0.5 }}
                             whileHover={{ scale: 1.1 }}
-                        ></motion.div>
+                        >
+
+                            <StaticCard id="44" />
+                        </motion.div>
                         <motion.div
                             transition={{ duration: 0.5 }}
                             whileHover={{ scale: 1.1 }}
-                        ></motion.div>
+                        >
+
+                            <StaticCard id="42" />
+                        </motion.div>
                     </div>
                     <div className="flex flex-wrap font-semibold text-lg text-gray-100 text-center">
                         <p>
-                            The Sweet Dolls deck is a fast play deck with emphasis on the
-                            reduce cost mechanic, command these sugary dolls through the lands
+                            The Talking Cats deck is a fast play deck with emphasis on the
+                            reduce cost mechanic, command these felines  through the lands
                             of Althreisha
                         </p>
                     </div>
