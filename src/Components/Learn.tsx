@@ -37,6 +37,19 @@ const content = [
         content:
             "In Princess Okoku, a card can have any of the following special effects: 1) Atk +(n): A card with this effect boosts all of its allies attack on the field by (n) 2) HP +(n): A card with this effect boost all of its allies defense on the field by (n) 3) Dmg +(n): A card with this effect deals (n) damage to all of the cards in the opponent field and the oponent itself 4) Cost -(n): A card with this effect reduces the cost of all the cards in hand by (n)",
     },
+    {
+        id: 6,
+        title: "How to Collect Decks",
+        content:
+            "In order to collect new decks, you must play the story mode. To access the story mode, you can click the explore button on your dashboard",
+    },
+    {
+        id: 7,
+        title: "How to Switch Decks",
+        content:
+            "In the Okoku Center, click on change deck. You will gain access to decks you have collected in the story, and are ready to use. Simply click on one of the options and you will be able to use that deck on your next exploration.",
+    },
+
 ];
 
 export const Learn: React.FC = () => {
