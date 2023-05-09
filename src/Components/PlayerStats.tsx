@@ -44,7 +44,7 @@ export const PlayerStats: React.FC = () => {
     };
 
     const changeDeck = (deckId: number) => {
-        setPermaDeck(deckId * 12, (deckId * 12) + 12)
+        setPermaDeck(deckId)
         setOpenDeckChoice(false)
     }
 
