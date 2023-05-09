@@ -5,10 +5,9 @@ import usePlayerStore from "../../store/store";
 export const ChooseDeck: React.FC = () => {
     const [setDeck] = usePlayerStore((state) => [state.setDeck]);
 
-    const handleSetDeck = (l: number, r: number) => {
-        localStorage.setItem("playerdeckl", l.toString());
-        localStorage.setItem("playerdeckr", r.toString());
-        setDeck(l, r);
+    const handleSetDeck = (id: number) => {
+        localStorage.setItem("po_playerdeck", id.toString());
+        setDeck(id);
     };
 
     return (
@@ -22,7 +21,7 @@ export const ChooseDeck: React.FC = () => {
                 <div
                     id="techno-princess"
                     className="w-1/2 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900 to-indigo-500 rounded-lg p-1 cursor-pointer"
-                    onClick={() => handleSetDeck(0, 12)}
+                    onClick={() => handleSetDeck(0)}
                 >
                     <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
                         <h1>Techno Princess</h1>
@@ -58,7 +57,7 @@ export const ChooseDeck: React.FC = () => {
                 <div
                     id="dragon-empire"
                     className=" w-1/2 bg-gradient-to-r from-orange-600 to-orange-500 rounded-lg p-1 cursor-pointer"
-                    onClick={() => handleSetDeck(12, 24)}
+                    onClick={() => handleSetDeck(1)}
                 >
                     <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
                         <h1>Dragon Empire</h1>
@@ -95,7 +94,7 @@ export const ChooseDeck: React.FC = () => {
                 <div
                     id="spirit-fairies"
                     className="w-1/2 bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-fuchsia-300 via-green-400 to-rose-700 rounded-lg p-4 cursor-pointer"
-                    onClick={() => handleSetDeck(24, 36)}
+                    onClick={() => handleSetDeck(2)}
                 >
                     <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
                         <h1>Spirit Fairies</h1>
@@ -132,6 +131,7 @@ export const ChooseDeck: React.FC = () => {
                 <div
                     id="dolls"
                     className="w-1/2 bg-gradient-to-r from-sky-400 to-blue-500 rounded-lg p-4"
+                    onClick={() => handleSetDeck(3)}
                 >
                     <div className="flex justify-center font-bold text-2xl mb-4 text-stone-50">
                         <h1>Sweet Dolls</h1>
