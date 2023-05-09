@@ -3,18 +3,18 @@ import usePlayerStore from "../../store/store";
 import { Welcome } from "./Welcome";
 import { ChooseDeck } from "./ChooseDeck";
 import { ConfirmDeck } from "./ConfirmDeck";
+import { parseInt } from "lodash";
 
 export const TutorialDashboard: React.FC = () => {
     const [step, setStep] = useState(1);
-    const [setTutorial, deck, owned, setToOwned] = usePlayerStore((state) => [state.setTutorial, state.deck, state.owned, state.setOwned]);
+    const [setTutorial, deck] = usePlayerStore((state) => [state.setTutorial, state.deck]);
     const cancelTutorial = () => {
         localStorage.setItem("isTutorial", "0");
         setTutorial();
-        const l = localStorage.getItem("playerdeckl")
+        const l = localStorage.getItem("po_playerdeck")
         if (l !== null) {
-            const deckId = Math.floor(parseInt(l, 10) / 12)
-            setToOwned(deckId)
-            localStorage.setItem("po_odecks", JSON.stringify(owned))
+            const deckId = parseInt(l, 10)
+            localStorage.setItem("po_odecks", JSON.stringify([deckId]))
         }
     };
 
@@ -68,8 +68,8 @@ export const TutorialDashboard: React.FC = () => {
                     </div>
                 )}
                 {step !== 3 ? (
-                    <button className=" bg-stone-900 hover:bg-stone-800 group transition inline-flex items-center rounded-full px-4 py-1.5 font-semibold text-white" onClick={handleNextStep} disabled={deck.length === 0 && step !== 1}>
-                        {deck.length === 0 && step != 1 ? "Choose Deck" : <>Continue
+                    <button className=" bg-stone-900 hover:bg-stone-800 group transition inline-flex items-center rounded-full px-4 py-1.5 font-semibold text-white" onClick={handleNextStep} disabled={deck === -1 && step !== 1}>
+                        {deck === -1 && step != 1 ? "Choose Deck" : <>Continue
                             <svg
                                 className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
                                 fill="none"
