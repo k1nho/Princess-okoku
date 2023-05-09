@@ -48,7 +48,7 @@ export const PlayerStats: React.FC = () => {
         setOpenDeckChoice(false)
     }
 
-    const storybg = (level <= 3 && level >= 0) ? storybgs[level] : storybgs[0];
+    const storybg = storybgs[level % 4];
 
 
     const DeckChoice = (
