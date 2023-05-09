@@ -52,7 +52,7 @@ export const ComputerControls: React.FC = () => {
                 if (idx !== -1) {
                     for (let i = 0; i < handCards.length; i++) {
                         const eCard = handCards[i];
-                        if (eCard !== null && energy - eCard.cost >= 0) {
+                        if (eCard !== null && eCard !== undefined && energy - eCard.cost >= 0) {
                             removeCardFromHand(eCard.id)
                             addCardToEPlay(idx, eCard)
                             setEnemyEnergy(eCard.cost)
@@ -63,21 +63,16 @@ export const ComputerControls: React.FC = () => {
 
             // ATTACK STEP
             const pCards = getEPlayedCards();
-            console.log(pCards)
             for (let i = 0; i < pCards.length; i++) {
                 const eCard = pCards[i];
                 if (eCard === null) continue;
                 const uCards = getUPlayedCards();
                 const uIdx = uCards.findIndex((card) => card !== null)
-                console.log("User field", uCards)
                 if (uIdx === -1) {
-
-                    console.log("lifepoint attack: ", eCard.atk)
                     attackLp(eCard.atk)
                 }
                 else {
                     const uCard = uCards[uIdx]
-                    console.log("attacking cards: ", uCard?.name)
                     if (uCard !== null) attackCard(uCard, eCard)
                 }
             }
