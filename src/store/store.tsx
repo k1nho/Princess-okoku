@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { BattleInfo, Card, PlayerInfo } from "./types";
 import { v4 as uuidv4 } from "uuid";
 import { cardpool } from "./cardpool";
+import { parseInt } from "lodash";
 
 const playerid = uuidv4();
 
@@ -52,12 +53,7 @@ interface PlayerStore {
     finishBattle: () => void;
 }
 
-const initialInfo: PlayerInfo = {
-    id: playerid,
-    name: "Kaede",
-    wins: 0,
-    losses: 0,
-};
+
 
 const initialBattleInfo: BattleInfo = {
     deck: [],
@@ -102,6 +98,17 @@ const storageLevel = localStorage.getItem("po_level");
 const cacheLevel = storageLevel !== null ? parseInt(storageLevel, 10) : 0;
 const storageOwned = localStorage.getItem("po_odecks");
 const cacheOwned = storageOwned !== null ? JSON.parse(storageOwned) : [];
+const storageWins = localStorage.getItem("po_wins")
+const cachedWins = storageWins !== null ? parseInt(storageWins, 10) : 0;
+const storageLosses = localStorage.getItem("po_losses")
+const cachedLosses = storageLosses !== null ? parseInt(storageLosses, 10) : 0;
+
+const initialInfo: PlayerInfo = {
+    id: playerid,
+    name: "Kaede",
+    wins: cachedWins,
+    losses: cachedLosses,
+};
 
 const startGame = {
     tutorial: localStorage.getItem("isTutorial") ? false : true,
@@ -163,7 +170,7 @@ const addCardToPlay = (
 };
 
 const takeDamage = (playedCards: (Card | null)[], card: Card, dmg: number) => {
-    const pCards = [...playedCards];
+    const pCards = [...playedCards.map((o) => (o ? { ...o } : null))];
     for (let i = 0; i < pCards.length; i++) {
         const match = pCards[i];
         if (match !== null && match.id === card.id) {
@@ -218,7 +225,7 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
         set((state) => ({
             enemyBattleInfo: {
                 ...state.enemyBattleInfo,
-                deck: shuffleDeck(state.level),
+                deck: shuffleDeck(state.level % 4),
             },
         })),
     setFirstRoundHand: () =>
