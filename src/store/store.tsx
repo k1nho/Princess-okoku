@@ -8,7 +8,7 @@ const playerid = uuidv4();
 interface PlayerStore {
     tutorial: boolean;
     owned: number[];
-    deck: Card[];
+    deck: number;
     info: PlayerInfo;
     level: number;
     cardsCollected: number;
@@ -20,13 +20,14 @@ interface PlayerStore {
     battleWinCond: boolean;
     setTutorial: () => void;
     setOwned: (deckId: number) => void;
+    getOwned: () => number[];
     setGameMode: (mode: string) => void;
     setName: (name: string) => void;
     setWins: () => void;
     setLosses: () => void;
     setLevel: () => void;
     setTurn: () => void;
-    setDeck: (l: number, r: number) => void;
+    setDeck: (id: number) => void;
     setBattleDeck: () => void;
     setEBattleDeck: () => void;
     setFirstRoundHand: () => void;
@@ -43,7 +44,10 @@ interface PlayerStore {
     attackElp: (atk: number) => void;
     attacklp: (atk: number) => void;
     setEnergy: (cost: number) => void;
+    setEnemyEnergy: (cost: number) => void;
     resetEnergy: () => void;
+    getPlayedCards: () => (Card | null)[];
+    getEPlayedCards: () => (Card | null)[];
     setWinCond: () => void;
     finishBattle: () => void;
 }
@@ -72,46 +76,42 @@ export const getCard = (id: string): Card => {
             break;
         }
     }
-    return res;
+    return { ...res };
 };
 
-const getDeck = (l: number, r: number): Card[] => {
-    return cardpool.slice(l, r);
+export const getDeck = (l: number, r: number): Card[] => {
+    return [...cardpool.slice(l, r).map((o) => ({ ...o }))];
 };
 
 const getCollectedDecks = (ownedDecks: number[], deckId: number) => {
-    return [...ownedDecks, deckId]
-}
-
-
-const returnBounds = (): [boolean, number, number] => {
-    let l = -1;
-    let r = -1;
-    const storedl = localStorage.getItem("playerdeckl");
-    const storedr = localStorage.getItem("playerdeckr");
-    if (storedl !== null && storedr !== null) {
-        l = parseInt(storedl, 10);
-        r = parseInt(storedr, 10);
-        return [true, l, r];
-    } else return [false, l, r];
+    return [...ownedDecks, deckId];
 };
 
-const cachedDeck = returnBounds();
-const storageLevel = localStorage.getItem("po_level")
-const cacheLevel = (storageLevel !== null) ? parseInt(storageLevel, 10) : 0
-const storageOwned = localStorage.getItem("po_odecks")
-const cacheOwned = storageOwned !== null ? JSON.parse(storageOwned) : []
+const returnBounds = (): [boolean, number] => {
+    let l = -1;
+    const stored = localStorage.getItem("po_playerdeck");
+    if (stored !== null) {
+        l = parseInt(stored, 10);
+        return [true, l];
+    } else return [false, l];
+};
+
+const storageDeck = returnBounds();
+const cachedDeck = storageDeck[0] ? storageDeck[1] : 0;
+const storageLevel = localStorage.getItem("po_level");
+const cacheLevel = storageLevel !== null ? parseInt(storageLevel, 10) : 0;
+const storageOwned = localStorage.getItem("po_odecks");
+const cacheOwned = storageOwned !== null ? JSON.parse(storageOwned) : [];
 
 const startGame = {
     tutorial: localStorage.getItem("isTutorial") ? false : true,
     owned: cacheOwned,
-    deck: cachedDeck[0] ? getDeck(cachedDeck[1], cachedDeck[2]) : [],
+    deck: localStorage.getItem("isTutorial") ? cachedDeck : -1,
     info: initialInfo,
     turn: 1,
     battleInfo: initialBattleInfo,
     enemyBattleInfo: initialBattleInfo,
     gamePhase: "Draw",
-    eGamePhase: "End",
     battleWinCond: false,
     gameMode: "MainMenu",
     level: cacheLevel,
@@ -119,8 +119,8 @@ const startGame = {
 };
 
 /* BATTLE MECHANICS */
-const shuffleDeck = (deck: Card[]): Card[] => {
-    const deckcp = [...deck];
+export const shuffleDeck = (deckId: number): Card[] => {
+    const deckcp = getDeck(deckId * 12, deckId * 12 + 12);
     for (let i = deckcp.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [deckcp[i], deckcp[j]] = [deckcp[j], deckcp[i]];
@@ -129,7 +129,7 @@ const shuffleDeck = (deck: Card[]): Card[] => {
 };
 
 const setFirstRoundHand = (deck: Card[]) => {
-    return [...deck.slice(8, 12), null];
+    return [...deck.slice(8, 12).map((c) => ({ ...c })), null];
 };
 
 const draw = (deck: Card[], cardsInHand: (Card | null)[], drawPos: number) => {
@@ -184,7 +184,7 @@ const checkWinCond = (
     return false;
 };
 
-const usePlayerStore = create<PlayerStore>()((set) => ({
+const usePlayerStore = create<PlayerStore>()((set, get) => ({
     ...startGame,
     setGameMode: (mode: string) => set(() => ({ gameMode: mode })),
     setName: (name: string) =>
@@ -200,12 +200,15 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
             level: state.level < 3 ? state.level + 1 : state.level,
         })),
     setTutorial: () => set(() => ({ tutorial: false })),
-    setOwned: (deckId: number) => set((state) => ({ owned: getCollectedDecks(state.owned, deckId) })),
+    setOwned: (deckId: number) =>
+        set((state) => ({ owned: getCollectedDecks(state.owned, deckId) })),
+    getOwned: () => {
+        return get().owned;
+    },
     setTurn: () => set((state) => ({ turn: state.turn + 1 })),
-    setDeck: (l: number, r: number) =>
-        set((state) => ({
-            deck: getDeck(l, r),
-            battleInfo: { ...state.battleInfo, deck: getDeck(l, r) },
+    setDeck: (id: number) =>
+        set(() => ({
+            deck: id,
         })),
     setBattleDeck: () =>
         set((state) => ({
@@ -215,7 +218,7 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
         set((state) => ({
             enemyBattleInfo: {
                 ...state.enemyBattleInfo,
-                deck: shuffleDeck(getDeck(12 * state.level, 12 * state.level + 12)),
+                deck: shuffleDeck(state.level),
             },
         })),
     setFirstRoundHand: () =>
@@ -328,8 +331,32 @@ const usePlayerStore = create<PlayerStore>()((set) => ({
         set((state) => ({
             battleInfo: { ...state.battleInfo, lp: state.battleInfo.lp - atk },
         })),
-    setEnergy: (cost: number) => set((state) => ({ battleInfo: { ...state.battleInfo, energy: state.battleInfo.energy - cost } })),
-    resetEnergy: () => set((state) => ({ battleInfo: { ...state.battleInfo, energy: state.turn + 1 }, enemyBattleInfo: { ...state.enemyBattleInfo, energy: state.turn + 1 } })),
+    setEnergy: (cost: number) =>
+        set((state) => ({
+            battleInfo: {
+                ...state.battleInfo,
+                energy: state.battleInfo.energy - cost,
+            },
+        })),
+
+    setEnemyEnergy: (cost: number) =>
+        set((state) => ({
+            enemyBattleInfo: {
+                ...state.enemyBattleInfo,
+                energy: state.enemyBattleInfo.energy - cost,
+            },
+        })),
+    resetEnergy: () =>
+        set((state) => ({
+            battleInfo: { ...state.battleInfo, energy: state.turn + 1 },
+            enemyBattleInfo: { ...state.enemyBattleInfo, energy: state.turn + 1 },
+        })),
+    getPlayedCards: () => {
+        return get().battleInfo.playedCards;
+    },
+    getEPlayedCards: () => {
+        return get().enemyBattleInfo.playedCards;
+    },
     setWinCond: () =>
         set((state) => ({
             battleWinCond: checkWinCond(
