@@ -13,7 +13,7 @@ export const MainMenu: React.FC = () => {
                 </motion.div>
                 <motion.div className="absolute top-10 left-6" animate={{ x: 100, y: 100, rotate: -25 }} transition={{ duration: 1 }}><StaticCard id="7" /></motion.div>
                 <motion.div className="absolute bottom-0 right-10" animate={{ x: -80, y: -50, rotate: -25 }} transition={{ duration: 1 }}><StaticCard id="32" /></motion.div>
-                <motion.div className="absolute top-10 right-6" animate={{ x: -60, y: 80, rotate: 30 }} transition={{ duration: 1 }}><StaticCard id="14" /></motion.div>
+                <motion.div className="absolute top-10 right-6" animate={{ x: -60, y: 80, rotate: 30 }} transition={{ duration: 1 }}><StaticCard id="44" /></motion.div>
                 <motion.div className="absolute bottom-0 left-10" animate={{ x: 100, y: -80, rotate: 25 }} transition={{ duration: 1 }}><StaticCard id="15" /></motion.div>
                 <div>
                     <h1 className="font-extrabold text-transparent text-8xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 animate-gradient">
