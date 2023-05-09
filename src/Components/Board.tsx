@@ -4,6 +4,7 @@ import { EplayField } from "./EPlayField"
 import usePlayerStore from "../store/store"
 import { GiCrown } from "react-icons/gi"
 import { ComputerControls } from "./ComputerControls"
+import { useState } from "react"
 
 const storybgs = [
     { bg: "src/assets/bgs/stage_machina_world.png", name: "Machina Kingdom" },
@@ -15,25 +16,34 @@ const storybgs = [
 
 export const Board: React.FC = () => {
 
-    const [winCond, setWinCond, turn, setGameMode, finishBattle, level, setLevel, owned, setToOwned, getOwned] = usePlayerStore((state) => [state.battleWinCond, state.setWinCond, state.turn, state.setGameMode, state.finishBattle, state.level, state.setLevel, state.owned, state.setOwned, state.getOwned])
+    const [winCond, setWinCond, turn, setGameMode, finishBattle, level, setLevel, owned, setToOwned, getOwned, uDrawPos, uLp, setWins, setLosses, info] = usePlayerStore((state) => [state.battleWinCond, state.setWinCond, state.turn, state.setGameMode, state.finishBattle, state.level, state.setLevel, state.owned, state.setOwned, state.getOwned, state.battleInfo.drawPos, state.battleInfo.lp, state.setWins, state.setLosses, state.info])
+
 
     const handleVictory = () => {
+        if (uLp <= 0 || uDrawPos < 0) {
+            setLosses()
+            localStorage.setItem("po_losses", (info.losses + 1).toString())
+        }
+        else {
+            setWins()
+            localStorage.setItem("po_losses", (info.wins + 1).toString())
+        }
         finishBattle()
         setGameMode("Dashboard")
         setWinCond()
         setLevel()
-        localStorage.setItem("po_level", ((level + 1) % 4).toString())
-        if (!owned.includes(level)) setToOwned(level);
+        localStorage.setItem("po_level", (level + 1).toString())
+        if (!owned.includes((level + 1) % 4)) setToOwned(level);
         localStorage.setItem("po_odecks", JSON.stringify(getOwned()))
     }
 
-    const storybg = (level <= 3 && level >= 0) ? storybgs[level] : storybgs[0];
+    const storybg = storybgs[level % 4];
 
     if (winCond) {
         return (
             <div className="flex flex-col justify-center items-center">
                 <div>
-                    <h1 className="font-bold text-4xl">Victory</h1>
+                    <h1 className="font-bold text-4xl">{(uLp <= 0 || uDrawPos < 0) ? "Defeat" : "Victory"}</h1>
                 </div>
                 <button className="flex items-center space-x-2 bg-pink-400 rounded-full px-4 py-2 hover:bg-pink-600 transition ease-in-out duration-700 text-white" onClick={handleVictory}>
 
