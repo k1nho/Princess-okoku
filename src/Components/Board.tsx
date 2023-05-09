@@ -26,14 +26,14 @@ export const Board: React.FC = () => {
         }
         else {
             setWins()
-            localStorage.setItem("po_losses", (info.wins + 1).toString())
+            localStorage.setItem("po_wins", (info.wins + 1).toString())
         }
         finishBattle()
         setGameMode("Dashboard")
         setWinCond()
         setLevel()
         localStorage.setItem("po_level", (level + 1).toString())
-        if (!owned.includes((level + 1) % 4)) setToOwned(level);
+        if (!owned.includes((level + 1) % 4)) setToOwned((level + 1) % 4);
         localStorage.setItem("po_odecks", JSON.stringify(getOwned()))
     }
 
