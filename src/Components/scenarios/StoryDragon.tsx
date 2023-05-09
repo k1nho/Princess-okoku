@@ -1,3 +1,11 @@
+import usePlayerStore from "../../store/store";
+import { useState } from "react"
+import pkaede from "../../assets/story_sprites/princess_kaede_nbg.png";
+import dadDragon from "../../assets/story_sprites/dad_dragon.png"
+import zig from "../../assets/story_sprites/zig.png"
+import dragonGenie from "../../assets/story_sprites/dragon_genie.png"
+import { GiCrown } from "react-icons/gi";
+
 const dialogs = [
     {
         name: "Narrator",
@@ -7,14 +15,15 @@ const dialogs = [
 
     { name: "Princess Kaede", dialog: " AHHHHHHHH Dragon!!!" },
     {
-        name: "Princess Kaede",
-        dialog: "So, you're saying that you're not dangerous?",
-    },
-    {
         name: "Dad Dragon",
         dialog:
             "Please don't be afraid of us. We're not the dangerous creatures that people make us out to be.",
     },
+    {
+        name: "Princess Kaede",
+        dialog: "So, you're saying that you're not dangerous?",
+    },
+
     {
         name: "Zig",
         dialog: "That's right! We're actually pretty scared creatures ourselves.",
@@ -69,7 +78,7 @@ const dialogs = [
     {
         name: "Princess Kaede",
         dialog:
-            "I see your dad is amazing Zig. Excuse me, Dragon Genie. I was wondering if you could tell me if there are any places in Althreisha where I might ",
+            "I see your dad is amazing Zig!",
     },
 
     {
@@ -97,5 +106,138 @@ const dialogs = [
 ];
 
 export const StoryDragon = () => {
-    return <div></div>;
+    const [setGameMode] = usePlayerStore((state) => [state.setGameMode]);
+    const [dialogIndex, setDialogIndex] = useState(0);
+
+    const nextDialog = () => {
+        if (dialogIndex < dialogs.length - 1) {
+            setDialogIndex(dialogIndex + 1);
+        }
+    };
+
+    const prevDialog = () => {
+        if (dialogIndex > 0) {
+            setDialogIndex(dialogIndex - 1);
+        }
+    };
+
+    return (
+        <div className="flex flex-col items-center justify-center space-y-4">
+            <div className="bg-stone-900 rounded-xl p-4 text-white text-4xl">
+                <h1 className="font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Fear The Dragons?</h1>
+            </div>
+            <div className="flex justify-center w-full h-3/4">
+                <div className="w-1/3 h-full">
+                    <img className="h-48 mx-auto" src={pkaede} alt="Protagonist" />
+                </div>
+                <div className="w-1/3 h-full flex justify-center items-center">
+                    <div
+                        className="max-w-xs w-full h-full relative"
+                        style={{ width: "1000px" }}
+                    >
+                        <div className="flex flex-col">
+                            {dialogs[dialogIndex].name === "Princess Kaede" && (
+                                <div className="my-2 p-2 bg-pink-300 rounded-md rounded-bl-none shadow-md">
+                                    <h2 className="text-2xl font-bold">
+                                        {dialogs[dialogIndex].name}
+                                    </h2>
+                                    <p style={{ wordWrap: "break-word" }}>
+                                        {dialogs[dialogIndex].dialog}
+                                    </p>
+                                </div>
+                            )}
+                            {dialogs[dialogIndex].name !== "Princess Kaede" &&
+                                dialogs[dialogIndex].name !== "Narrator" && (
+                                    <div className="my-2 p-2 bg-blue-300 rounded-md rounded-br-none shadow-md">
+                                        <h2 className="text-2xl font-bold">
+                                            {dialogs[dialogIndex].name}
+                                        </h2>
+                                        <p style={{ wordWrap: "break-word" }}>
+                                            {dialogs[dialogIndex].dialog}
+                                        </p>
+                                    </div>
+                                )}
+                            {dialogs[dialogIndex].name === "Narrator" && (
+                                <div className="my-2 p-2 bg-blue-300 rounded-md rounded-br-none shadow-md">
+                                    <p
+                                        className=" text-2xl text-center font-semibold"
+                                        style={{ wordWrap: "break-word" }}
+                                    >
+                                        {dialogs[dialogIndex].dialog}
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>{" "}
+                <div className="w-1/3 h-full flex flex-col items-center justify-center">
+                    <div className="flex">
+
+                        <img className="h-48" src={dadDragon} alt="AI Princess" />
+                        <img className="h-48" src={zig} alt="TCP princess" />
+
+                    </div>
+                    <img className="h-48" src={dragonGenie} alt="Wifi Princess" />
+
+                </div>
+            </div>
+            <div className="mt-4 flex justify-center items-center space-x-4">
+                <button
+                    className="flex items-center space-x-2 bg-pink-400 rounded-full px-4 py-2 hover:bg-pink-600 transition ease-in-out duration-700 text-white"
+                    onClick={() => setGameMode("Dashboard")}
+                >
+                    <GiCrown />
+                    <p>Back To Dashboard</p>
+                </button>
+
+                <button
+                    className="bg-stone-900 hover:bg-stone-800 group transition inline-flex items-center rounded-full px-4 py-1.5 font-semibold text-white"
+                    onClick={prevDialog}
+                >
+                    <svg
+                        className="mt-0.5 mr-2 -ml-1 stroke-white stroke-2 transform rotate-180"
+                        fill="none"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 10 10"
+                        aria-hidden="true"
+                    >
+                        <path
+                            className="opacity-0 group-hover:opacity-100"
+                            d="M0 5h7"
+                        ></path>
+                        <path
+                            className="transition group-hover:translate-x-[3px]"
+                            d="M1 1l4 4-4 4"
+                        ></path>
+                    </svg>
+                    Back
+                </button>
+                <button
+                    className="bg-stone-900 hover:bg-stone-800 group transition inline-flex items-center rounded-full px-4 py-1.5 font-semibold text-white"
+                    onClick={nextDialog}
+                >
+                    Next
+                    <svg
+                        className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
+                        fill="none"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 10 10"
+                        aria-hidden="true"
+                    >
+                        <path
+                            className="opacity-0 group-hover:opacity-100"
+                            d="M0 5h7"
+                        ></path>
+                        <path
+                            className="transition group-hover:translate-x-[3px]"
+                            d="M1 1l4 4-4 4"
+                        ></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    );
+
 };
