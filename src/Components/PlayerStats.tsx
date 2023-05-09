@@ -19,7 +19,7 @@ const storybgs = [
     { bg: "src/assets/bgs/bg_machina_world.png", name: "Machina Kingdom", deckName: "Techno Princess" },
     { bg: "src/assets/bgs/bg_dragons_den.png", name: "Dragon's Den", deckName: "Dragon Empire" },
     { bg: "src/assets/bgs/bg_road_to_starry.png", name: "Road To Starry", deckName: "Spirit Fairies" },
-    { bg: "src/assets/bgs/bg_cosmos.png", name: "Uverworld", deckName: "Talking Cats" },
+    { bg: "src/assets/bgs/bg_cosmos.png", name: "FelinePaw Nebula", deckName: "Talking Cats" },
 ];
 
 export const PlayerStats: React.FC = () => {
