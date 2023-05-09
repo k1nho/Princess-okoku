@@ -15,7 +15,7 @@ const storybgs = [
 
 export const Board: React.FC = () => {
 
-    const [winCond, setWinCond, turn, setGameMode, finishBattle, level, setLevel, owned, setToOwned] = usePlayerStore((state) => [state.battleWinCond, state.setWinCond, state.turn, state.setGameMode, state.finishBattle, state.level, state.setLevel, state.owned, state.setOwned])
+    const [winCond, setWinCond, turn, setGameMode, finishBattle, level, setLevel, owned, setToOwned, getOwned] = usePlayerStore((state) => [state.battleWinCond, state.setWinCond, state.turn, state.setGameMode, state.finishBattle, state.level, state.setLevel, state.owned, state.setOwned, state.getOwned])
 
     const handleVictory = () => {
         finishBattle()
@@ -24,7 +24,7 @@ export const Board: React.FC = () => {
         setLevel()
         localStorage.setItem("po_level", ((level + 1) % 4).toString())
         if (!owned.includes(level)) setToOwned(level);
-        localStorage.setItem("po_odecks", JSON.stringify(owned))
+        localStorage.setItem("po_odecks", JSON.stringify(getOwned()))
     }
 
     const storybg = (level <= 3 && level >= 0) ? storybgs[level] : storybgs[0];
