@@ -14,12 +14,16 @@ import { DeckDisplay } from "./DeckDisplay";
 import { StaticCard } from "./StaticCard";
 import { motion } from "framer-motion"
 import { useState } from "react";
+import machinabg from "../assets/bgs/stage_machina_world.png"
+import dragonbg from "../assets/bgs/stage_dragon_den.png"
+import fairybg from "../assets/bgs/stage_road_to_starry.png"
+import nebula from "../assets/bgs/bg_cosmos.png"
 
 const storybgs = [
-    { bg: "src/assets/bgs/bg_machina_world.png", name: "Machina Kingdom", deckName: "Techno Princess" },
-    { bg: "src/assets/bgs/bg_dragons_den.png", name: "Dragon's Den", deckName: "Dragon Empire" },
-    { bg: "src/assets/bgs/bg_road_to_starry.png", name: "Road To Starry", deckName: "Spirit Fairies" },
-    { bg: "src/assets/bgs/bg_cosmos.png", name: "FelinePaw Nebula", deckName: "Talking Cats" },
+    { bg: machinabg, name: "Machina Kingdom", deckName: "Techno Princess" },
+    { bg: dragonbg, name: "Dragon's Den", deckName: "Dragon Empire" },
+    { bg: fairybg, name: "Road To Starry", deckName: "Spirit Fairies" },
+    { bg: nebula, name: "FelinePaw Nebula", deckName: "Talking Cats" },
 ];
 
 export const PlayerStats: React.FC = () => {
