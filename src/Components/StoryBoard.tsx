@@ -5,9 +5,9 @@ import { StoryDragon } from "./scenarios/StoryDragon";
 import { StoryCats } from "./scenarios/StoryCats";
 
 const storybgs = [
-    "src/assets/bgs/stage_machina_world.png",
+    "src/assets/bgs/bg_story_techno.png",
     "src/assets/bgs/bg_story_dragon_px.png",
-    "src/assets/bgs/stage_road_to_starry.png",
+    "src/assets/bgs/bg_story_fairies.png",
     "src/assets/bgs/bg_story_cats.png"
 ];
 
