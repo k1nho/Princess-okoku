@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import usePlayerStore from "../store/store";
 import { CardPlaceholder } from "./CardPlaceholder";
-import { delay } from "framer-motion";
 
 export const ComputerControls: React.FC = () => {
     const [
