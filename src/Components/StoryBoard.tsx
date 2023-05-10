@@ -3,12 +3,17 @@ import { StoryTechno } from "./scenarios/StoryTechno";
 import { StoryFairy } from "./scenarios/StoryFairy";
 import { StoryDragon } from "./scenarios/StoryDragon";
 import { StoryCats } from "./scenarios/StoryCats";
+import machinabg from "../assets/bgs/bg_story_techno.png"
+import dragonbg from "../assets/bgs/bg_story_dragon_px.png"
+import fairybg from "../assets/bgs/bg_story_fairies.png"
+import nebula from "../assets/bgs/bg_story_cats.png"
+
 
 const storybgs = [
-    "src/assets/bgs/bg_story_techno.png",
-    "src/assets/bgs/bg_story_dragon_px.png",
-    "src/assets/bgs/bg_story_fairies.png",
-    "src/assets/bgs/bg_story_cats.png"
+    machinabg,
+    dragonbg,
+    fairybg,
+    nebula
 ];
 
 export const StoryBoard: React.FC = () => {
