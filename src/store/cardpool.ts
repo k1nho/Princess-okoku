@@ -4,7 +4,7 @@ import { Card } from "./types";
 // (13, 24) Dragon Empire Deck
 // (25, 36) Spirit Fairies Empire Deck
 export const cardpool: Card[] = [
-    { id: "1", name: "AI Princess", iml: "src/assets/decks/techno_princess/card_ai_princess.png", atk: 6, def: 6, cost: 6, special: "instantdmg 3", description: "Dmg +3" },
+    { id: "1", name: "AI Princess", iml: "../assets/decks/techno_princess/card_ai_princess.png", atk: 6, def: 6, cost: 6, special: "instantdmg 3", description: "Dmg +3" },
     { id: "2", name: "Mini Princess", iml: "src/assets/decks/techno_princess/card_mini_princess.png", atk: 1, def: 2, cost: 1, special: "", description: "" },
     { id: "3", name: "Wifi Princess", iml: "src/assets/decks/techno_princess/card_princess_wifi.png", atk: 3, def: 2, cost: 2, special: "", description: "" },
     { id: "4", name: "Look Princess", iml: "src/assets/decks/techno_princess/card_search_princess.png", atk: 2, def: 2, cost: 2, special: "reducecost 1", description: "Cost -1" },
@@ -47,12 +47,12 @@ export const cardpool: Card[] = [
     { id: "36", name: "Magic Wand", iml: "src/assets/decks/spirit_fairies/qp_magic_wand.png", atk: 0, def: 0, cost: 1, special: "instantatk 1", description: "Atk +1" },
 
 
-    { id: "37", name: "Berose", iml: "src/assets/decks/talking_cats/card_berose.png", atk: 1, def: 2, cost: 1, special: "reducecost 1", description: "Cost -1" },
+    { id: "37", name: "Berose", iml: "/assets/decks/talking_cats/card_berose.png", atk: 1, def: 2, cost: 1, special: "reducecost 1", description: "Cost -1" },
     { id: "38", name: "Koma", iml: "src/assets/decks/talking_cats/card_koma_doll.png", atk: 2, def: 1, cost: 1, special: "reducecost 1", description: "Cost -1" },
     { id: "39", name: "Kurochi", iml: "src/assets/decks/talking_cats/card_kurochi.png", atk: 4, def: 3, cost: 3, special: "reducecost 2", description: "Cost -3" },
     { id: "40", name: "Mitten", iml: "src/assets/decks/talking_cats/card_mitten.png", atk: 1, def: 1, cost: 1, special: "", description: "" },
     { id: "41", name: "Nichirinko", iml: "src/assets/decks/talking_cats/card_nichirinko.png", atk: 3, def: 2, cost: 2, special: "reducecost 1", description: "Cost -1" },
-    { id: "42", name: "Risto", iml: "src/assets/decks/talking_cats/card_risto.png", atk: 3, def: 3, cost: 3, special: "reducecost 2", description: "Cost -2" },
+    { id: "42", name: "Risto", iml: "../assets/decks/talking_cats/card_risto.png", atk: 3, def: 3, cost: 3, special: "reducecost 2", description: "Cost -2" },
     { id: "43", name: "Stringer", iml: "src/assets/decks/talking_cats/card_stringer.png", atk: 5, def: 5, cost: 4, special: "", description: "" },
     { id: "44", name: "Troas", iml: "src/assets/decks/talking_cats/card_troas.png", atk: 7, def: 7, cost: 5, special: "reducecost 4", description: "Cost -4" },
     { id: "45", name: "Funbox", iml: "src/assets/decks/talking_cats/qp_funbox.png", atk: 0, def: 0, cost: 1, special: "instantatk 1", description: "Atk +1" },
