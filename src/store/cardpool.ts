@@ -25,7 +25,7 @@ export const cardpool: Card[] = [
     { id: "17", name: "Flash Dragon", iml: "src/assets/decks/dragon_empire/card_flash_dragon.png", atk: 4, def: 1, cost: 3, special: "", description: "" },
     { id: "18", name: "ZZZ Dragon", iml: "src/assets/decks/dragon_empire/card_zzz_dragon.png", atk: 2, def: 2, cost: 2, special: "instanthp 1", description: "HP +1" },
     { id: "19", name: "Dad Dragon", iml: "src/assets/decks/dragon_empire/card_dad_dragon.png", atk: 7, def: 6, cost: 6, special: "", description: "" },
-    { id: "20", name: "Zig", iml: "src/assets/decks/card_zig_dragon.png", atk: 1, def: 1, cost: 2, special: "reducecost 2", description: "Cost -2" },
+    { id: "20", name: "Zig", iml: "src/assets/decks/dragon_empire/card_zig_dragon.png", atk: 1, def: 1, cost: 2, special: "reducecost 2", description: "Cost -2" },
     { id: "21", name: "Dragon Potion", iml: "src/assets/decks/dragon_empire/qp_dragon_heal.png", atk: 0, def: 0, cost: 1, special: "instanthp 1", description: "HP +1" },
     { id: "22", name: "Dragon Map", iml: "src/assets/decks/dragon_empire/qp_dragon_map.png", atk: 0, def: 0, cost: 3, special: "reducecost 3", description: "Cost -3" },
     { id: "23", name: "Dragon Power", iml: "src/assets/decks/dragon_empire/qp_dragon_power.png", atk: 0, def: 0, cost: 1, special: "instantatk 1", description: "Atk +1" },
