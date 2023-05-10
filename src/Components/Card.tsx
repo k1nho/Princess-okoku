@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import usePlayerStore, { getCard } from "../store/store";
 import { GiRollingEnergy, GiSwordWound } from "react-icons/gi";
 
@@ -35,6 +35,10 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
     const [hasAttacked, setHasattacked] = useState(false);
     const card = id ? getCard(id) : getCard("1");
 
+    useEffect(() => {
+        if (gamephase === "Attack") setHasattacked(false)
+    }, [gamephase])
+
     const emptyFieldSize = ePlayedCards.reduce((acc, val) => {
         if (val === null) return acc + 1;
         return acc;
@@ -67,6 +71,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
         setIsAttack(false);
         setHasattacked(true);
     };
+
 
     const Organize = (
         <div className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex justify-center items-center z-10 curor-pointer">
