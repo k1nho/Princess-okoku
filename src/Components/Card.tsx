@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import usePlayerStore, { getCard } from "../store/store";
 import { GiRollingEnergy, GiSwordWound } from "react-icons/gi";
 import { cardImages } from "./cardImages"
+import { parseInt } from "lodash";
 
 interface props {
     id: string;
@@ -36,6 +37,8 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
     const [isAttackOpen, setIsAttack] = useState(false);
     const [hasAttacked, setHasattacked] = useState(false);
     const card = id ? getCard(id) : getCard("1");
+    const cardIdx = parseInt(id, 10)
+    const cardImg = cardImages[cardIdx - 1]
 
     useEffect(() => {
         if (gamephase === "Attack") setHasattacked(false)
@@ -157,7 +160,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
                 </div>
                 <div className="font-semibold">{card.name}</div>
             </div>
-            <img src={cardImages[0]} alt="ai_princess" className="w-28 h-28 rounded-sm" />
+            <img src={cardImg} alt="ai_princess" className="w-28 h-28 rounded-sm" />
             <div className="flex justify-between text-amber-100 font-semibold bg-stone-900">
                 <div className="bg-red-700 rounded-br px-3 py-1 flex items-center justify-center">
                     {card.atk > 0 ? card.atk : "S"}

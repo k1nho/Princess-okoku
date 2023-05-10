@@ -1,12 +1,16 @@
 import { motion } from "framer-motion"
 import { getCard } from "../store/store"
+import { cardImages } from "./cardImages"
+import { parseInt } from "lodash"
 
 interface props {
-    id?: string
+    id: string
 }
 
 export const StaticCard: React.FC<props> = ({ id }) => {
     const card = id ? getCard(id) : getCard("1")
+    const cardIdx = parseInt(id, 10)
+    const cardImg = cardImages[cardIdx - 1]
 
     return (
 
@@ -15,7 +19,7 @@ export const StaticCard: React.FC<props> = ({ id }) => {
                 <div className="absolute -top-4 -left-6 rounded-full  px-3 py-1 border-2 border-stone-900 bg-blue-800 text-amber-100 font-semibold">{card.cost}</div>
                 <div className="font-semibold text-center">{card.name}</div>
             </div>
-            <img src={card.iml} alt={card.name} className="w-28 h-28 rounded-sm" />
+            <img src={cardImg} alt={card.name} className="w-28 h-28 rounded-sm" />
             <div className="flex justify-between text-amber-100 font-semibold bg-stone-900">
                 <div className="bg-red-700 rounded-br px-3 py-1 flex items-center justify-center">
                     {card.atk > 0 ? card.atk : "S"}
