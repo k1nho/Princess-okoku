@@ -15,7 +15,7 @@ export const StaticCard: React.FC<props> = ({ id }) => {
                 <div className="absolute -top-4 -left-6 rounded-full  px-3 py-1 border-2 border-stone-900 bg-blue-800 text-amber-100 font-semibold">{card.cost}</div>
                 <div className="font-semibold text-center">{card.name}</div>
             </div>
-            <img src="../assets/decks/dragon_empire/card_zig_dragon.png" alt={card.name} className="w-28 h-28 rounded-sm" />
+            <img src={card.iml} alt={card.name} className="w-28 h-28 rounded-sm" />
             <div className="flex justify-between text-amber-100 font-semibold bg-stone-900">
                 <div className="bg-red-700 rounded-br px-3 py-1 flex items-center justify-center">
                     {card.atk > 0 ? card.atk : "S"}
