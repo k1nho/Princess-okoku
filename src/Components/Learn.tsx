@@ -33,7 +33,7 @@ const content = [
 
     {
         id: 5,
-        title: "Effects",
+        title: "Effects ()",
         content:
             "In Princess Okoku, a card can have any of the following special effects: 1) Atk +(n): A card with this effect boosts all of its allies attack on the field by (n) 2) HP +(n): A card with this effect boost all of its allies defense on the field by (n) 3) Dmg +(n): A card with this effect deals (n) damage to all of the cards in the opponent field and the oponent itself 4) Cost -(n): A card with this effect reduces the cost of all the cards in hand by (n)",
     },
@@ -41,7 +41,7 @@ const content = [
         id: 6,
         title: "How to Collect Decks",
         content:
-            "In order to collect new decks, you must play the story mode. To access the story mode, you can click the explore button on your dashboard",
+            "In order to collect new decks, you must play the story mode. To access the story mode, you can click the explore button on your dashboard. Every new world yields a new deck (beating the machina world yields the techno princess deck, beating the dragon's den yields the dragon empire deck, and so on).",
     },
     {
         id: 7,
