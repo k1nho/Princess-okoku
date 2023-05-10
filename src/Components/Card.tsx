@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import usePlayerStore, { getCard } from "../store/store";
 import { GiRollingEnergy, GiSwordWound } from "react-icons/gi";
+import { cardImages } from "./cardImages"
 
 interface props {
     id: string;
@@ -29,6 +30,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
         state.battleInfo.energy,
         state.setEnergy,
     ]);
+
 
     const [isCommandOpen, setIsCommandOpen] = useState(false);
     const [isAttackOpen, setIsAttack] = useState(false);
@@ -155,7 +157,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
                 </div>
                 <div className="font-semibold">{card.name}</div>
             </div>
-            <img src={card.iml} alt="ai_princess" className="w-28 h-28 rounded-sm" />
+            <img src={cardImages[0]} alt="ai_princess" className="w-28 h-28 rounded-sm" />
             <div className="flex justify-between text-amber-100 font-semibold bg-stone-900">
                 <div className="bg-red-700 rounded-br px-3 py-1 flex items-center justify-center">
                     {card.atk > 0 ? card.atk : "S"}
