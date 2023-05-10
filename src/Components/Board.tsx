@@ -5,9 +5,10 @@ import usePlayerStore from "../store/store";
 import { GiCrown } from "react-icons/gi";
 import { FaCrown } from "react-icons/fa";
 import { ComputerControls } from "./ComputerControls";
+import machinabg from "../assets/bgs/stage_machina_world.png"
 
 const storybgs = [
-    { bg: "src/assets/bgs/stage_machina_world.png", name: "Machina Kingdom" },
+    { bg: machinabg, name: "Machina Kingdom" },
     { bg: "src/assets/bgs/stage_dragon_den.png", name: "Dragon's Den" },
     { bg: "src/assets/bgs/stage_road_to_starry.png", name: "Road To Starry" },
     { bg: "src/assets/bgs/stage_cosmos.png", name: "FelinePaw Nebula" },
