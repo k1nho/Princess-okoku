@@ -23,7 +23,7 @@ export const EplayField: React.FC = () => {
             </div>
             <div id="invocation-zone" className="grid grid-cols-4 gap-10">
                 {playedCards.map((card) => {
-                    return card ? <Card key={card.id} id={card.id} atkmode={true} /> : null
+                    return card ? <Card key={card.id} id={card.id} atkmode={true} atk={card.atk} def={card.def} cost={card.cost} /> : null
                 })}
             </div>
         </div>

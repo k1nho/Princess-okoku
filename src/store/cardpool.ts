@@ -18,7 +18,7 @@ export const cardpool: Card[] = [
     { id: "12", name: "Ruler Portal", iml: "src/assets/decks/techno_princess/qp_princess_portal.png", atk: 0, def: 0, cost: 3, special: "instantatk 2", description: "Atk +2" },
 
 
-    { id: "13", name: "Barrier Dragon", iml: "src/assets/decks/dragon_empire/card_barrier_dragon.png", atk: 1, def: 3, cost: 2, special: "instantdmg 2", description: "Dmg +2" },
+    { id: "13", name: "Barrier Dragon", iml: "src/assets/decks/dragon_empire/card_barrier_dragon.png", atk: 1, def: 3, cost: 2, special: "instanthp 2", description: "HP +2" },
     { id: "14", name: "Dragon Pot", iml: "src/assets/decks/dragon_empire/card_dragon_pot.png", atk: 2, def: 1, cost: 1, special: "instantdmg 1", description: "Dmg +1" },
     { id: "15", name: "Dragon Genie", iml: "src/assets/decks/dragon_empire/card_dragon_genie.png", atk: 2, def: 2, cost: 1, special: "instantdmg 1", description: "Dmg +1" },
     { id: "16", name: "Gold Dragon", iml: "src/assets/decks/dragon_empire/card_golden_dragon.png", atk: 3, def: 2, cost: 2, special: "instantdmg 1", description: "Dmg +1" },

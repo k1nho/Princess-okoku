@@ -95,7 +95,7 @@ export const CardControls: React.FC = () => {
         <div className="flex gap-8">
             <div className="flex items-center space-x-2">
                 {handCards.map((card) => {
-                    return card ? <Card key={card.id} id={card.id} atkmode={false} /> : null;
+                    return card ? <Card key={card.id} id={card.id} atkmode={false} atk={card.atk} def={card.def} cost={card.cost} /> : null
                 })}
             </div>
             {fullHand ? <Modal setFullHand={setFullHand} /> : <></>}

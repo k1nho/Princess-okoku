@@ -164,8 +164,36 @@ const addCardToPlay = (
     card: Card,
     pos: number
 ) => {
-    const field = [...cardsInPlay];
-    field[pos] = card;
+    const field = [...cardsInPlay.map((o) => o ? ({ ...o }) : null)];
+    // place the card on field if it is not a spell
+    field[pos] = card.atk !== 0 ? card : null;
+    // check the effect and activate the effect accordingly
+    if (card.special !== "") {
+        const [cardEffect, value] = card.special.split(" ")
+        const mult = parseInt(value, 10)
+        switch (cardEffect) {
+            case "instantatk":
+                for (const card of field) {
+                    if (card !== null && card !== undefined) {
+                        card.atk += mult
+                    }
+                }
+                break;
+            case "instantdmg":
+                break;
+            case "instanthp":
+                for (const card of field) {
+                    if (card !== null && card !== undefined) {
+                        card.def += mult
+                    }
+                }
+                break;
+            case "reducecost":
+                break;
+            default:
+                break;
+        }
+    }
     return field;
 };
 
@@ -204,7 +232,7 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
         })),
     setLevel: () =>
         set((state) => ({
-            level: state.level < 3 ? state.level + 1 : state.level,
+            level: state.level + 1,
         })),
     setTutorial: () => set(() => ({ tutorial: false })),
     setOwned: (deckId: number) =>
