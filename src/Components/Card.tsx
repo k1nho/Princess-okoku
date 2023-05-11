@@ -7,9 +7,12 @@ import { parseInt } from "lodash";
 interface props {
     id: string;
     atkmode: boolean;
+    atk: number,
+    def: number,
+    cost: number
 }
 
-export const Card: React.FC<props> = ({ id, atkmode }) => {
+export const Card: React.FC<props> = ({ id, atkmode, atk, def, cost }) => {
     const [
         playedCards,
         ePlayedCards,
@@ -40,6 +43,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
     const cardIdx = parseInt(id, 10)
     const cardImg = cardImages[cardIdx - 1]
 
+
     useEffect(() => {
         if (gamephase === "Attack") setHasattacked(false)
     }, [gamephase])
@@ -61,7 +65,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
         e.stopPropagation();
         removeCardFromHand(card.id);
         addCardToPlay(pos, card);
-        setEnergy(card.cost);
+        setEnergy(cost);
         setIsCommandOpen(false);
     };
 
@@ -72,7 +76,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
         e.stopPropagation();
         const eCard = ePlayedCards[pos];
         if (eCard !== null) attackCard(card, eCard);
-        else attackElp(card.atk);
+        else attackElp(atk);
         setIsAttack(false);
         setHasattacked(true);
     };
@@ -163,7 +167,7 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
             <img src={cardImg} alt="ai_princess" className="w-28 h-28 rounded-sm" />
             <div className="flex justify-between text-amber-100 font-semibold bg-stone-900">
                 <div className="bg-red-700 rounded-br px-3 py-1 flex items-center justify-center">
-                    {card.atk > 0 ? card.atk : "S"}
+                    {atk > 0 ? atk : "S"}
                 </div>
                 {atkmode ? (
                     <button
@@ -177,13 +181,13 @@ export const Card: React.FC<props> = ({ id, atkmode }) => {
                     <button
                         className="bg-amber-500 text-white rounded-full p-2"
                         onClick={() => setIsCommandOpen(true)}
-                        disabled={gamephase !== "Attack" || energy - card.cost < 0}
+                        disabled={gamephase !== "Attack" || energy - cost < 0}
                     >
                         <GiRollingEnergy />
                     </button>
                 )}
                 <div className="bg-blue-700 rounded-bl px-3 py-1 flex items-center justify-center">
-                    {card.def > 0 ? card.def : "S"}
+                    {def > 0 ? def : "S"}
                 </div>
             </div>
             <div className="flex flex-wrap bg-stone-900 rounded-b-md">
