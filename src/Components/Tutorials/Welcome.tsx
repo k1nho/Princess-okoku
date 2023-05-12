@@ -18,7 +18,7 @@ export const Welcome: React.FC = () => {
                     In this game, you will join Princess Kaede and her friends on an
                     adventure through Althreisha, encountering all sorts of fascinating
                     creatures along the way. From dragons to cyberpunk princesses,
-                    fairies, and enchanted dolls, the kingdom is filled with wonder and
+                    fairies, and talking cats, the kingdom is filled with wonder and
                     excitement.
                 </p>
                 <p className="mb-4 text-white font-semibold text-lg text-center leading-8">
