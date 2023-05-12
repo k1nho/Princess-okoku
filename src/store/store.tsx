@@ -215,7 +215,6 @@ const applyDamageEffect = (cardsInPlay: (Card | null)[], card: Card) => {
     const mult = parseInt(val, 10)
     for (let card of field) {
         if (card !== null && card !== undefined) {
-            console.log("yes enter")
             if (card.def - mult <= 0) {
                 card = null
             }
