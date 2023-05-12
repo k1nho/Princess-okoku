@@ -160,7 +160,7 @@ export const Card: React.FC<props> = ({ id, atkmode, atk, def, cost }) => {
                 className="flex justify-center bg-yellow-500 relative text-white rounded-t-md"
             >
                 <div className="absolute -top-4 -left-6 rounded-full  px-3 py-1 border-2 border-stone-900 bg-blue-800 text-amber-100 font-semibold">
-                    {card.cost}
+                    {cost}
                 </div>
                 <div className="font-semibold">{card.name}</div>
             </div>

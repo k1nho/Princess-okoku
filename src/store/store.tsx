@@ -179,8 +179,6 @@ const addCardToPlay = (
                     }
                 }
                 break;
-            case "instantdmg":
-                break;
             case "instanthp":
                 for (const card of field) {
                     if (card !== null && card !== undefined) {
@@ -188,14 +186,44 @@ const addCardToPlay = (
                     }
                 }
                 break;
-            case "reducecost":
-                break;
             default:
                 break;
         }
     }
     return field;
 };
+
+const applyCostEffect = (cardsInHand: (Card | null)[], card: Card) => {
+    const [effect, val] = card.special.split(" ")
+    if (effect !== "reducecost") return cardsInHand;
+    const field = [...cardsInHand.map((o) => o ? ({ ...o }) : null)]
+
+    const mult = parseInt(val, 10)
+    for (const card of field) {
+        if (card !== null && card !== undefined) {
+            card.cost = (card.cost - mult <= 0) ? 0 : card.cost - mult;
+        }
+    }
+    return field;
+}
+
+const applyDamageEffect = (cardsInPlay: (Card | null)[], card: Card) => {
+    const [effect, val] = card.special.split(" ");
+    if (effect !== "instantdmg") return cardsInPlay;
+    const field = [...cardsInPlay.map((o) => o ? ({ ...o }) : null)]
+
+    const mult = parseInt(val, 10)
+    for (let card of field) {
+        if (card !== null && card !== undefined) {
+            console.log("yes enter")
+            if (card.def - mult <= 0) {
+                card = null
+            }
+            else card.def -= mult;
+        }
+    }
+    return field
+}
 
 const takeDamage = (playedCards: (Card | null)[], card: Card, dmg: number) => {
     const pCards = [...playedCards.map((o) => (o ? { ...o } : null))];
@@ -322,7 +350,12 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
                     card,
                     pos
                 ),
+                handCards: applyCostEffect(state.enemyBattleInfo.handCards, card)
             },
+            battleInfo: {
+                ...state.battleInfo,
+                playedCards: applyDamageEffect(state.battleInfo.playedCards, card)
+            }
         })),
 
     removeCardFromHand: (id: string) =>
@@ -337,7 +370,12 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
             battleInfo: {
                 ...state.battleInfo,
                 playedCards: addCardToPlay(state.battleInfo.playedCards, card, pos),
+                handCards: applyCostEffect(state.battleInfo.handCards, card)
             },
+            enemyBattleInfo: {
+                ...state.enemyBattleInfo,
+                playedCards: applyDamageEffect(state.enemyBattleInfo.playedCards, card)
+            }
         })),
 
     attackCard: (card: Card, eCard: Card) =>
