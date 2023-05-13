@@ -38,7 +38,7 @@ const dialogs = [
     {
         name: "Princess Kaede",
         dialog:
-            "You know, I never thought I'd meet such funny cats in space. You all really know how to lighten the mood. Wait, now that I see you aren't you the popular cats on the internet?!",
+            "You know, I never thought I'd meet such funny cats in space. You all really know how to lighten the mood. Wait, now that I see you, aren't you the popular cats on the internet?!",
     },
 
     {

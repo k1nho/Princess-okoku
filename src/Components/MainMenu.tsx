@@ -17,9 +17,17 @@ export const MainMenu: React.FC = () => {
                 such as the effect system and a more responsive UI, the core of the game is there. In the future, there will be few more updates that will include the effect system as well as a gacha system and currency to get favorite cards and flex your dashboard. Enjoy your stay in Althreisha!
             </p>
             <div>
-                <div className="flex space-x-2">
-                    <p>Github:</p>
-                    <a href="https://github.com/k1nho" target="_blank" className="text-gray-100">github.com/k1nho</a>
+                <div className="flex flex-col space-y-1">
+                    <div className="flex space-x-2">
+                        <p>Learn about the creation of Princess Okoku:</p>
+                        <a href="https://medium.com/@k1nho/from-concept-to-creation-the-making-of-princess-okoku-with-ai-assets-generation-and-react-ae93a31ae2dc" target="_blank" className="text-blue-500">medium.com/@k1nho</a>
+                    </div>
+                    <div className="flex space-x-2">
+
+                        <p>Github:</p>
+                        <a href="https://github.com/k1nho" target="_blank" className="text-blue-500">github.com/k1nho</a>
+                    </div>
+
                 </div>
             </div>
             <button onClick={() => setIsInfoOpen(false)} className="bg-red-500 rounded-lg p-2 hover:bg-red-400">Close</button>
