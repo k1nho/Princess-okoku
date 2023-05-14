@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { GiCrown } from "react-icons/gi";
 import usePlayerStore from "../../store/store";
-import troas from "../../assets/story_sprites/troas.png";
-import risto from "../../assets/story_sprites/Risto.png";
-import stringer from "../../assets/story_sprites/Stringer.png";
-import pkaede from "../../assets/story_sprites/princess_kaede_nbg.png";
+import troas from "../../assets/story_sprites/troas.webp";
+import risto from "../../assets/story_sprites/Risto.webp";
+import stringer from "../../assets/story_sprites/Stringer.webp";
+import pkaede from "../../assets/story_sprites/princess_kaede_nbg.webp";
 
 const dialogs = [
     {

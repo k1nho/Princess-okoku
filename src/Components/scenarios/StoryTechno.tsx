@@ -1,8 +1,8 @@
 import { useState } from "react";
-import pkaede from "../../assets/story_sprites/princess_kaede_nbg.png";
-import aiprincess from "../../assets/story_sprites/ai_princess.png"
-import tcpprincess from "../../assets/story_sprites/TCP_princess.png"
-import wifiprincess from "../../assets/story_sprites/wifiprin.png"
+import pkaede from "../../assets/story_sprites/princess_kaede_nbg.webp";
+import aiprincess from "../../assets/story_sprites/ai_princess.webp"
+import tcpprincess from "../../assets/story_sprites/TCP_princess.webp"
+import wifiprincess from "../../assets/story_sprites/wifiprin.webp"
 import usePlayerStore from "../../store/store";
 import { GiCrown } from "react-icons/gi";
 

@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { GiCrown } from "react-icons/gi";
 import usePlayerStore from "../../store/store";
-import pkaede from "../../assets/story_sprites/princess_kaede_nbg.png";
-import terra from "../../assets/story_sprites/terra.png"
-import alance from "../../assets/story_sprites/alance.png"
-import astroFairy from "../../assets/story_sprites/astro_fairy.png"
+import pkaede from "../../assets/story_sprites/princess_kaede_nbg.webp";
+import terra from "../../assets/story_sprites/terra.webp"
+import alance from "../../assets/story_sprites/alance.webp"
+import astroFairy from "../../assets/story_sprites/astro_fairy.webp"
 
 const dialogs = [
     { name: "Narrator", dialog: "Princess Kaede encounters a group of fairies, expecting to find them charming and kind. But to her surprise, they are rude and seem to want to cause trouble." },

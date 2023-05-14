@@ -14,10 +14,10 @@ import { DeckDisplay } from "./DeckDisplay";
 import { StaticCard } from "./StaticCard";
 import { motion } from "framer-motion"
 import { useState } from "react";
-import machinabg from "../assets/bgs/stage_machina_world.png"
-import dragonbg from "../assets/bgs/stage_dragon_den.png"
-import fairybg from "../assets/bgs/stage_road_to_starry.png"
-import nebula from "../assets/bgs/bg_cosmos.png"
+import machinabg from "../assets/bgs/stage_machina_world.webp"
+import dragonbg from "../assets/bgs/stage_dragon_den.webp"
+import fairybg from "../assets/bgs/stage_road_to_starry.webp"
+import nebula from "../assets/bgs/bg_cosmos.webp"
 
 const storybgs = [
     { bg: machinabg, name: "Machina Kingdom", deckName: "Techno Princess" },

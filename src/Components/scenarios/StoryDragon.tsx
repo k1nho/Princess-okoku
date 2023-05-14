@@ -1,9 +1,9 @@
 import usePlayerStore from "../../store/store";
 import { useState } from "react"
-import pkaede from "../../assets/story_sprites/princess_kaede_nbg.png";
-import dadDragon from "../../assets/story_sprites/dad_dragon.png"
-import zig from "../../assets/story_sprites/zig.png"
-import dragonGenie from "../../assets/story_sprites/dragon_genie.png"
+import pkaede from "../../assets/story_sprites/princess_kaede_nbg.webp";
+import dadDragon from "../../assets/story_sprites/dad_dragon.webp"
+import zig from "../../assets/story_sprites/zig.webp"
+import dragonGenie from "../../assets/story_sprites/dragon_genie.webp"
 import { GiCrown } from "react-icons/gi";
 
 const dialogs = [
