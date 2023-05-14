@@ -25,6 +25,8 @@ The Okoku center is the player's dashboard, in there players can change decks, r
 
 ### Battle Phases
 
+Explorations are at the core of the gameplay in Princess Okoku. Explorations allow the player to progress in the story and unlock more decks. Thus, it is necessary to understand the core battle flow gameplay.
+
 ![Princess Okoku Battle](./docs/Battle_po.png)
 
 Each battle consists of 3 main phases:
