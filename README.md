@@ -35,7 +35,7 @@ Each battle consists of 3 main phases:
 
 2. Battle phase: The second phase of a battle consists of organizing cards in your play field, such card has the invocation logo active (1). However, invocations are only possible if enough energy is available. After having a card on the field, it can attack the opponent board(2). If the opponent has cards, then you must clear the field. Otherwise, you can attack its lifepoints directly.
 
-![Invocation vs Attack](./docs/explanation_atksvsinv.png)
+![Invocation vs Attack](./docs/explanation_atkvsinv.png)
 
 3. End phase: Once the attack has been finished, you can finish the turn by selecting end attack phase.
 
