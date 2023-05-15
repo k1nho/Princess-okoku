@@ -12,12 +12,12 @@ import {
 import { IoIosStats } from "react-icons/io";
 import { DeckDisplay } from "./DeckDisplay";
 import { StaticCard } from "./StaticCard";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import { useState } from "react";
-import machinabg from "../assets/bgs/stage_machina_world.webp"
-import dragonbg from "../assets/bgs/stage_dragon_den.webp"
-import fairybg from "../assets/bgs/stage_road_to_starry.webp"
-import nebula from "../assets/bgs/bg_cosmos.webp"
+import machinabg from "../assets/bgs/stage_machina_world.webp";
+import dragonbg from "../assets/bgs/stage_dragon_den.webp";
+import fairybg from "../assets/bgs/stage_road_to_starry.webp";
+import nebula from "../assets/bgs/bg_cosmos.webp";
 
 const storybgs = [
     { bg: machinabg, name: "Machina Kingdom", deckName: "Techno Princess" },
@@ -27,7 +27,16 @@ const storybgs = [
 ];
 
 export const PlayerStats: React.FC = () => {
-    const [info, level, setGameMode, setPermaDeck, setBattleDeck, setEBattleDeck, setFirstRoundHand, ownedDecks] = usePlayerStore((state) => [
+    const [
+        info,
+        level,
+        setGameMode,
+        setPermaDeck,
+        setBattleDeck,
+        setEBattleDeck,
+        setFirstRoundHand,
+        ownedDecks,
+    ] = usePlayerStore((state) => [
         state.info,
         state.level,
         state.setGameMode,
@@ -35,10 +44,10 @@ export const PlayerStats: React.FC = () => {
         state.setBattleDeck,
         state.setEBattleDeck,
         state.setFirstRoundHand,
-        state.owned
+        state.owned,
     ]);
 
-    const [OpenDeckChoice, setOpenDeckChoice] = useState(false)
+    const [OpenDeckChoice, setOpenDeckChoice] = useState(false);
 
     const handleExplore = () => {
         setBattleDeck();
@@ -48,35 +57,36 @@ export const PlayerStats: React.FC = () => {
     };
 
     const changeDeck = (deckId: number) => {
-        setPermaDeck(deckId)
-        setOpenDeckChoice(false)
-    }
+        setPermaDeck(deckId);
+        setOpenDeckChoice(false);
+    };
 
     const storybg = storybgs[level % 4];
-
 
     const DeckChoice = (
         <div className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex flex-col justify-center items-center z-10">
             <p className="text-lg font-bold text-white">Deck to take on adventure:</p>
-            <div className="p-2 rounded-md grid grid-cols-4 grid-rows-2 gap-2">
+            <div className="p-4 rounded-lg grid grid-cols-4 grid-rows-1 gap-2 bg-stone-900">
                 {ownedDecks.map((deckId) => (
-                    <button
+                    <div
+                        className="bg-stone-600 rounded-md px-4 py-2 hover:bg-stone-700 cursor-pointer text-lg flex justify-center"
                         key={deckId}
-                        className="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200 focus:outline-none"
                         onClick={() => changeDeck(deckId)}
                     >
-                        {storybgs[deckId].deckName}
-                    </button>
+                        <button className="text-white focus:outline-none">
+                            {storybgs[deckId].deckName}
+                        </button>
+                    </div>
                 ))}
             </div>
-
-            <button className="px-4 py-2 rounded-md  text-white bg-red-500 hover:bg-red-400 focus:outline-none" onClick={() => setOpenDeckChoice(false)}><GiCancel /></button>
+            <button
+                className="px-4 py-2 rounded-md  text-white bg-red-500 hover:bg-red-400 focus:outline-none text-lg mt-2"
+                onClick={() => setOpenDeckChoice(false)}
+            >
+                <GiCancel />
+            </button>
         </div>
-
-    )
-
-
-
+    );
 
     return (
         <div className="min-h-screen flex justify-around items-center space-x-2">
@@ -156,10 +166,17 @@ export const PlayerStats: React.FC = () => {
                             <h4 className="text-xl font-semibold text-center">
                                 Story Progression
                             </h4>
-                            <h5 className="text-md text-left text-lg font-semibold">{storybg.name}</h5>
+                            <h5 className="text-md text-left text-lg font-semibold">
+                                {storybg.name}
+                            </h5>
                         </div>
                         <div className="flex justify-center items-center space-x-4">
-                            <motion.div className="h-64" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+                            <motion.div
+                                className="h-64"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 1 }}
+                            >
                                 <img
                                     src={storybg.bg}
                                     alt={storybg.name}
