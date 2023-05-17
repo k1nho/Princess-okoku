@@ -34,6 +34,8 @@ export const Board: React.FC = () => {
         setWins,
         setLosses,
         info,
+        coins,
+        setCoins
     ] = usePlayerStore((state) => [
         state.battleWinCond,
         state.setWinCond,
@@ -50,6 +52,8 @@ export const Board: React.FC = () => {
         state.setWins,
         state.setLosses,
         state.info,
+        state.currency,
+        state.setCurrency
     ]);
 
     const handleVictory = () => {
@@ -59,7 +63,9 @@ export const Board: React.FC = () => {
         } else {
             setWins();
             setLevel();
+            setCoins();
             localStorage.setItem("po_wins", (info.wins + 1).toString());
+            localStorage.setItem("po_coins", (coins + 10).toString());
         }
         finishBattle();
         setGameMode("Dashboard");

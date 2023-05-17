@@ -12,6 +12,7 @@ interface PlayerStore {
     deck: number;
     info: PlayerInfo;
     level: number;
+    currency: number;
     cardsCollected: number;
     gameMode: string;
     turn: number;
@@ -27,6 +28,7 @@ interface PlayerStore {
     setWins: () => void;
     setLosses: () => void;
     setLevel: () => void;
+    setCurrency: () => void;
     setTurn: () => void;
     setDeck: (id: number) => void;
     setBattleDeck: () => void;
@@ -102,6 +104,8 @@ const storageWins = localStorage.getItem("po_wins")
 const cachedWins = storageWins !== null ? parseInt(storageWins, 10) : 0;
 const storageLosses = localStorage.getItem("po_losses")
 const cachedLosses = storageLosses !== null ? parseInt(storageLosses, 10) : 0;
+const storageCoins = localStorage.getItem("po_coins");
+const cachedCoins = storageCoins !== null ? parseInt(storageCoins, 10) : 0;
 
 const initialInfo: PlayerInfo = {
     id: playerid,
@@ -115,6 +119,7 @@ const startGame = {
     owned: cacheOwned,
     deck: localStorage.getItem("isTutorial") ? cachedDeck : -1,
     info: initialInfo,
+    currency: cachedCoins,
     turn: 1,
     battleInfo: initialBattleInfo,
     enemyBattleInfo: initialBattleInfo,
@@ -261,6 +266,7 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
         set((state) => ({
             level: state.level + 1,
         })),
+    setCurrency: () => set((state) => ({ currency: state.currency + 10 })),
     setTutorial: () => set(() => ({ tutorial: false })),
     setOwned: (deckId: number) =>
         set((state) => ({ owned: getCollectedDecks(state.owned, deckId) })),

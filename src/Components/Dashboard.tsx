@@ -3,9 +3,10 @@ import { RiSwordFill } from "react-icons/ri";
 import { GiExitDoor, GiQueenCrown } from "react-icons/gi";
 import { TutorialDashboard } from "./Tutorials/TutorialDashBoard";
 import { PlayerStats } from "./PlayerStats";
+import { CoinSvg } from "./CoinSvg";
 
 export const Dashboard: React.FC = () => {
-    const [tutorial, setGameMode, setBattleDeck, setEBattleDeck, setFirstRoundHand, level, playerName] = usePlayerStore((state) => [
+    const [tutorial, setGameMode, setBattleDeck, setEBattleDeck, setFirstRoundHand, level, playerName, coins] = usePlayerStore((state) => [
         state.tutorial,
         state.setGameMode,
         state.setBattleDeck,
@@ -13,6 +14,7 @@ export const Dashboard: React.FC = () => {
         state.setFirstRoundHand,
         state.level,
         state.info.name,
+        state.currency
     ]);
 
     const handleExplore = () => {
@@ -38,13 +40,24 @@ export const Dashboard: React.FC = () => {
                         <div className="">{playerName}</div>
                         <div className="">Level {level}</div>
                         {!tutorial &&
-                            <button
-                                className=" flex items-center space-x-2 bg-stone-900 rounded-full px-4 py-2 hover:bg-stone-700 transition ease-in-out duration-700"
-                                onClick={handleExplore}
-                            >
-                                <p>Explore</p>
-                                <RiSwordFill />
-                            </button>
+                            <>
+                                <div className="flex items-center justify-center bg-stone-900 rounded-full px-4 py-0.5">
+                                    <div>
+                                        <CoinSvg />
+                                    </div>
+                                    <div>
+                                        {coins}
+                                    </div>
+
+                                </div>
+                                <button
+                                    className=" flex items-center space-x-2 bg-stone-900 rounded-full px-4 py-2 hover:bg-stone-700 transition ease-in-out duration-700"
+                                    onClick={handleExplore}
+                                >
+                                    <p>Explore</p>
+                                    <RiSwordFill />
+                                </button>
+                            </>
 
                         }
                         <button className="text-xl" onClick={() => setGameMode("MainMenu")}>
