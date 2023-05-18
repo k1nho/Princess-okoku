@@ -1,5 +1,6 @@
 import { Board } from "./Components/Board";
 import { Dashboard } from "./Components/Dashboard";
+import { GachaMachine } from "./Components/GachaMachine";
 import { Learn } from "./Components/Learn";
 import { MainMenu } from "./Components/MainMenu";
 import { StoryBoard } from "./Components/StoryBoard";
@@ -21,6 +22,10 @@ function App() {
 
     else if (gameMode === "Learn") {
         return <Learn />
+    }
+
+    else if (gameMode === "Gacha") {
+        return <GachaMachine />
     }
 
     return (

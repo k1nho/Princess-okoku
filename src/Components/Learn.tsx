@@ -33,9 +33,9 @@ const content = [
 
     {
         id: 5,
-        title: "Effects (Coming Soon)",
+        title: "Effects",
         content:
-            "In Princess Okoku, a card can have any of the following special effects: 1) Atk +(n): A card with this effect boosts all of its allies attack on the field by (n) 2) HP +(n): A card with this effect boost all of its allies defense on the field by (n) 3) Dmg +(n): A card with this effect deals (n) damage to all of the cards in the opponent field and the oponent itself 4) Cost -(n): A card with this effect reduces the cost of all the cards in hand by (n)",
+            "In Princess Okoku, a card can have any of the following special effects: 1) Atk +(n): A card with this effect boosts all of its allies attack on the field by (n) 2) HP +(n): A card with this effect boost all of its allies defense on the field by (n) 3) Dmg +(n): A card with this effect deals (n) damage to all of the cards in the opponent field  4) Cost -(n): A card with this effect reduces the cost of all the cards in hand by (n)",
     },
     {
         id: 6,
@@ -55,8 +55,11 @@ const content = [
         content:
             "In the Okoku Center, click on Read story. You will gain access to the current story based on the level you are in. After finishing a battle resulting in victory, you will unlock a brand new story for the corresponding world map.",
     },
-
-
+    {
+        id: 9,
+        title: "The Gacha System",
+        content: "Aside from collecting decks, you can also collect unique cards via the gacha system (not usable in battle). For every battle won, you will gain 10 Okoku coins which can be used in the Gacha to get a unique card. This is a collection of many creatures from Althreisha that do not appear in the main story with the exception of Princess Kaede.",
+    },
 ];
 
 export const Learn: React.FC = () => {

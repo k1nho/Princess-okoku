@@ -3,6 +3,7 @@ import { BattleInfo, Card, PlayerInfo } from "./types";
 import { v4 as uuidv4 } from "uuid";
 import { cardpool } from "./cardpool";
 import { parseInt } from "lodash";
+import { gachapool } from "./gachapool";
 
 const playerid = uuidv4();
 
@@ -13,7 +14,8 @@ interface PlayerStore {
     info: PlayerInfo;
     level: number;
     currency: number;
-    cardsCollected: number;
+    cardsCollected: string[];
+    favoriteCard: string;
     gameMode: string;
     turn: number;
     battleInfo: BattleInfo;
@@ -29,6 +31,10 @@ interface PlayerStore {
     setLosses: () => void;
     setLevel: () => void;
     setCurrency: () => void;
+    decreaseCurrency: () => void;
+    setCardsCollected: (cardId: string) => void;
+    getCardsCollected: () => string[];
+    setFavoriteCard: (id: string) => void;
     setTurn: () => void;
     setDeck: (id: number) => void;
     setBattleDeck: () => void;
@@ -77,6 +83,17 @@ export const getCard = (id: string): Card => {
     return { ...res };
 };
 
+export const getGachaCard = (id: string): Card => {
+    let res = gachapool[0];
+    for (let i = 0; i < gachapool.length; i++) {
+        if (id === gachapool[i].id) {
+            res = gachapool[i];
+            break;
+        }
+    }
+    return { ...res }
+}
+
 export const getDeck = (l: number, r: number): Card[] => {
     return [...cardpool.slice(l, r).map((o) => ({ ...o }))];
 };
@@ -84,6 +101,18 @@ export const getDeck = (l: number, r: number): Card[] => {
 const getCollectedDecks = (ownedDecks: number[], deckId: number) => {
     return [...ownedDecks, deckId];
 };
+
+const addCardToCollection = (cards: string[], card: string) => {
+    const collection = [...cards]
+
+    for (const c of cards) {
+        if (c === card) return collection
+    }
+
+    collection.push(card);
+    collection.sort((a, b) => Number(a) - Number(b))
+    return collection;
+}
 
 const returnBounds = (): [boolean, number] => {
     let l = -1;
@@ -106,6 +135,10 @@ const storageLosses = localStorage.getItem("po_losses")
 const cachedLosses = storageLosses !== null ? parseInt(storageLosses, 10) : 0;
 const storageCoins = localStorage.getItem("po_coins");
 const cachedCoins = storageCoins !== null ? parseInt(storageCoins, 10) : 0;
+const storageCollection = localStorage.getItem("po_collected")
+const cachedCollection = storageCollection ? JSON.parse(storageCollection) : [];
+const storageFavorite = localStorage.getItem("po_fav")
+const cachedFavorite = storageFavorite ? storageFavorite : "32";
 
 const initialInfo: PlayerInfo = {
     id: playerid,
@@ -127,7 +160,8 @@ const startGame = {
     battleWinCond: false,
     gameMode: "MainMenu",
     level: cacheLevel,
-    cardsCollected: 0,
+    cardsCollected: cachedCollection,
+    favoriteCard: cachedFavorite
 };
 
 /* BATTLE MECHANICS */
@@ -267,6 +301,10 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
             level: state.level + 1,
         })),
     setCurrency: () => set((state) => ({ currency: state.currency + 10 })),
+    decreaseCurrency: () => set((state) => ({ currency: state.currency - 10 })),
+    setCardsCollected: (cardId) => set((state) => ({ cardsCollected: addCardToCollection(state.cardsCollected, cardId) })),
+    getCardsCollected: () => { return get().cardsCollected },
+    setFavoriteCard: (id) => set((state) => ({ favoriteCard: id })),
     setTutorial: () => set(() => ({ tutorial: false })),
     setOwned: (deckId: number) =>
         set((state) => ({ owned: getCollectedDecks(state.owned, deckId) })),
