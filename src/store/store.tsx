@@ -304,7 +304,7 @@ const usePlayerStore = create<PlayerStore>()((set, get) => ({
     decreaseCurrency: () => set((state) => ({ currency: state.currency - 10 })),
     setCardsCollected: (cardId) => set((state) => ({ cardsCollected: addCardToCollection(state.cardsCollected, cardId) })),
     getCardsCollected: () => { return get().cardsCollected },
-    setFavoriteCard: (id) => set((state) => ({ favoriteCard: id })),
+    setFavoriteCard: (id) => set(() => ({ favoriteCard: id })),
     setTutorial: () => set(() => ({ tutorial: false })),
     setOwned: (deckId: number) =>
         set((state) => ({ owned: getCollectedDecks(state.owned, deckId) })),
