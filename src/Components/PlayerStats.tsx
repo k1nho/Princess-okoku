@@ -48,7 +48,7 @@ export const PlayerStats: React.FC = () => {
         state.cardsCollected
     ]);
 
-    const [OpenDeckChoice, setOpenDeckChoice] = useState(false);
+    const [openDeckChoice, setOpenDeckChoice] = useState(false);
     const [openFavorite, setOpenFavorite] = useState(false);
 
     const handleFavoriteSelection = (deckId: string) => {
@@ -111,8 +111,8 @@ export const PlayerStats: React.FC = () => {
     );
 
     return (
-        <div className="min-h-screen flex justify-around items-center space-x-2">
-            {OpenDeckChoice && DeckChoice}
+        <div className="min-h-screen flex justify-around items-center">
+            {openDeckChoice && DeckChoice}
             {openFavorite && CardCollection}
             <div className="flex flex-col justify-center items-center bg-stone-900 space-y-4 p-4 rounded-xl">
                 <div>
