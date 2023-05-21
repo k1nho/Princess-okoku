@@ -12,7 +12,7 @@ export const gachapool: Card[] = [
     { id: "1008", name: "Bou", iml: "../assets/gachamachine/jungle_bou.webp", atk: 3, def: 1, cost: 2, special: "", description: " Bou, the jungle monkey" },
     { id: "1009", name: "Topal", iml: "../assets/gachamachine/jungle_topal.webp", atk: 5, def: 6, cost: 4, special: "", description: " Topal, the jungle king" },
     { id: "1010", name: "Aror", iml: "../assets/gachamachine/midori_aror.webp", atk: 2, def: 3, cost: 2, special: "", description: " Aror, the green lion" },
-    { id: "1011", name: "Grandmido", iml: "../assets/gachamachine/midori_grandmido.webp", atk: 5, def: 5, cost: 6, special: "", description: " Granmido, the green grandpa" },
+    { id: "1011", name: "Grandmido", iml: "../assets/gachamachine/midori_grandmido.webp", atk: 5, def: 5, cost: 6, special: "", description: " Grandmido, the green grandpa" },
     { id: "1012", name: "Gulper", iml: "../assets/gachamachine/midori_gulper.webp", atk: 1, def: 1, cost: 1, special: "", description: " Gulper, the green goblin" },
     { id: "1013", name: "Primido", iml: "../assets/gachamachine/midori_prince.webp", atk: 2, def: 1, cost: 1, special: "", description: " Primido, the green prince" },
     { id: "1014", name: "Midori", iml: "../assets/gachamachine/midori_princess.webp", atk: 1, def: 2, cost: 1, special: "", description: " Midori, the green princess" },
