@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import usePlayerStore, { getCard } from "../store/store";
-import { GiRollingEnergy, GiSwordWound } from "react-icons/gi";
+import { GiRollingEnergy, GiSwordWound, GiBouncingSword } from "react-icons/gi";
 import { cardImages } from "./cardImages"
 import { parseInt } from "lodash";
+import { motion } from "framer-motion"
 
 interface props {
     id: string;
@@ -118,12 +119,21 @@ export const Card: React.FC<props> = ({ id, atkmode, atk, def, cost }) => {
         <div className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex justify-center items-center z-10">
             <div className="">
                 {emptyFieldSize === 8 ? (
-                    <div
-                        className="bg-sky-800 text-white text-2xl cursor-pointer rounded-xl p-4"
+                    <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ ease: "easeInOut" }}
+                        className="bg-stone-900 rounded-xl cursor-pointer flex justify-center items-center p-4 space-x-4 hover:bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black"
                         onClick={(e) => handleAttackClose(e, 0)}
                     >
-                        LP
-                    </div>
+
+                        <GiBouncingSword className="bg-gradient-to-r from-purple-400 to-pink-600 rounded-lg text-4xl" />
+                        <div>
+                            <h1 className="bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text text-4xl">
+                                Direct Attack
+                            </h1>
+
+                        </div>
+                    </motion.div>
                 ) : (
                     <div className="flex flex-col space-y-4">
                         <button
