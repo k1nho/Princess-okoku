@@ -1,13 +1,18 @@
-![Princess Okoku Banner](./docs/Banner.png)
+<div align="center">
+  <br>
+  <img src="https://i.ibb.co/sPyP1R1/Princess-Okoku-Banner.png" alt="Princess-Okoku-Banner" border="0">
+  <h1>👑 Princess Okoku 👑</h1>
+  <strong>Turn-based card game with a gacha mechanic</strong>
+  <br>
+</div>
 
-# Princess Okoku
+## Game Description
 
 Princess Kaede has lost its way in the kingdom of Althreisha. Help her find her way back home by exploring unique worlds and wondrous creatures. From dragons, cyberpunk princesses, fairies and, talking cats in the space Althreisha awaits.
 
 Use strategic thinking to command a deck of unique creatures, each with their own special abilities, to reveal the the secret of the kingdom. Explore the kingdom to unlock the power of other decks that can aid you in your adventure.
 
 ![Princess Okoku Story](./docs/Story_po.png)
-
 
 ## Game Mechanics
 
@@ -45,7 +50,7 @@ Each battle consists of 3 main phases:
 
 ### Win conditions
 
-There are mainly two win conditions in Princess Okoku. 
+There are mainly two win conditions in Princess Okoku.
 
 1. If a player reaches 0 lifepoints, then the other player wins.
 
